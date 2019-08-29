@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -21,10 +22,15 @@ public class PirateFragment extends Fragment {
 
     // TODO: Rename and change types of parameters
     private ArrayList<Player> players;
+    private ArrayList<Player> attackers;
     private String mParam2;
     private  TextView tvs[];
     int turn = 1;
     private RuleInterface mListener;
+    int turnIndex = 0;
+    int treasure = 0;
+    int trap = 0;
+    int attackerIndex = 0;
 
     public PirateFragment() {
         // Required empty public constructor
@@ -62,8 +68,15 @@ public class PirateFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_pirate, container, false);
+        attackers = new ArrayList<Player>();
+        for(int i = 0; i<players.size();i++) {
+            if (!players.get(i).getRole().equals("pirate"))
+                attackers.add(players.get(i));
+        }
 
         initViews(view);
+
+
         return view;
     }
 
@@ -100,7 +113,7 @@ public class PirateFragment extends Fragment {
        tvs[8] = view.findViewById(R.id.textView8);
        tvs[9] = view.findViewById(R.id.textView9);
 
-       for(int i = 0;i<10;i++) {
+       for(int i = 1;i<10;i++) {
            final int u = i;
            tvs[i].setOnClickListener(new View.OnClickListener() {
                public void onClick(View v) {
@@ -108,12 +121,58 @@ public class PirateFragment extends Fragment {
                }
 
            });
+           tvs[i].setText("X");
        }
+       tvs[0].setText("le pirate doit cacher son trésor");
    }
 
     private void viewClicked(int i)
     {
-        tvs[i].setText("clicked");
-    }
+        switch (turnIndex) {
+            case 0 :
+                tvs[0].setText("le pirate doit placer son piège");
+                tvs[i].setText("tresor");
+                treasure = i;
+                turnIndex = 1;
+                alertDialog("trésor placé");
+                break;
+            case 1:
+                if(i!=treasure) {
+                    tvs[0].setText("Au tour de " + attackers.get(attackerIndex).getName());
+                    tvs[treasure].setText("X");
+                    trap = i;
+                    tvs[trap].setText("X");
+                    alertDialog("piège placé");
+                    turnIndex = 2;
+                }
+                else alertDialog("le piège ne peut pas être au même endroit que le trésor");
+                break;
 
+            case 2:
+                if(i == trap) {
+                    tvs[i].setText("perdu");
+                    tvs[0].setText(attackers.get(attackerIndex).getName() + "à perdu");
+                }
+                else if(i == treasure) {
+                    tvs[i].setText("gagné");
+                    tvs[0].setText(attackers.get(attackerIndex).getName() + "à perdu");
+                }
+                else {
+                    tvs[i].setText("vide");
+                }
+                attackerIndex++;
+                if (attackerIndex==attackers.size())
+                    attackerIndex = 0;
+
+                break;
+
+            case 3:
+
+                break;
+        }
+
+    }
+    private void alertDialog(String text) {
+        Toast.makeText(getContext(),text,Toast.LENGTH_LONG).show();
+    }
 }

@@ -71,7 +71,9 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
     private void roleAttribution()
     {
         if(roleIndex != players.size()) {
-            showTextRule(data.getRole(players.get(roleIndex).getName(),roleIndex));
+            Rule role = data.getRole(players.get(roleIndex).getName(),roleIndex);
+            players.get(roleIndex).setRole(role.getName());
+            showTextRule(role);
             roleIndex++;
         }
         else {
