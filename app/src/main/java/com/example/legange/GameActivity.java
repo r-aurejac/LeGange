@@ -98,6 +98,7 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.game_linear_layout, PirateFragment.newInstance(players,"test"));
                 fragmentTransaction.commit();
+                ruleIndex = 2;
 
     }
     private void intro()

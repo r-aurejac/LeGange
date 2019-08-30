@@ -151,11 +151,16 @@ public class PirateFragment extends Fragment {
             case 2:
                 if(i == trap) {
                     tvs[i].setText("perdu");
-                    tvs[0].setText(attackers.get(attackerIndex).getName() + "à perdu");
+                    tvs[0].setText(attackers.get(attackerIndex).getName() + " à perdu");
+                    alertDialog(attackers.get(attackerIndex).getName() + " à perdu");
+                    mListener.onRuleEnd();
                 }
                 else if(i == treasure) {
                     tvs[i].setText("gagné");
-                    tvs[0].setText(attackers.get(attackerIndex).getName() + "à perdu");
+                    tvs[0].setText(attackers.get(attackerIndex).getName() + " à gagné");
+                    alertDialog(attackers.get(attackerIndex).getName() + " à gagné");
+                    Player.findPlayerByName(players,attackers.get(attackerIndex).getName()).incrementScore(2);
+                    mListener.onRuleEnd();
                 }
                 else {
                     tvs[i].setText("vide");

@@ -29,13 +29,13 @@ public class Data {
        roles.add(new Rule("chanceux",
                "player est le chanceux. Il commence avec 2 points supplémentaires, LA CHANCE.", 2));
        roles.add(new Rule("guerrier Indien",
-               "player est le guerrier Indien. Habitué du Gange, si il finit dernieril le partage avec l'avant dernier.",
+               "player est le guerrier Indien. Habitué du Gange, si il finit dernier il le partage avec l'avant dernier.",
                0));
        roles.add(new Rule("pirate",
                "player est le pirate. ARRRRRRRRRRRh",
                0));
        roles.add(new Rule("toxique",
-               "player est le toxique, tu pourra personnaliser le gange à ta sauce. ",
+               "player est le toxique, il pourra personnaliser le gange. ",
                0));
        Collections.shuffle(roles);
    }
