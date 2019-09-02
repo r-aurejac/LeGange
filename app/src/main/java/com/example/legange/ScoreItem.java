@@ -22,7 +22,7 @@ public class ScoreItem extends Fragment {
     private Player player;
 
     private RuleInterface mListener;
-    private TextView rankText;
+
     private TextView nameText;
     private TextView scoreText;
     public ScoreItem() {
@@ -54,7 +54,7 @@ public class ScoreItem extends Fragment {
 
 
         View view = inflater.inflate(R.layout.item_score, container, false);
-        rankText = (TextView) view.findViewById(R.id.rank_text);
+
         scoreText = (TextView) view.findViewById(R.id.score_text);
         nameText = (TextView) view.findViewById(R.id.name_text);
         if (player != null) {
@@ -72,14 +72,14 @@ public class ScoreItem extends Fragment {
 
     private void printHeader()
     {
-        rankText.setText("");
+
         scoreText.setText("Score");
         nameText.setText("Nom");
     }
 
     private void printScore()
     {
-        rankText.setText(String.valueOf(player.getScore()));
+
         scoreText.setText(String.valueOf(player.getScore()));
         nameText.setText(player.getName());
     }

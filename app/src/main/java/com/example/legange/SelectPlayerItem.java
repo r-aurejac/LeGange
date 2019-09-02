@@ -1,26 +1,26 @@
 package com.example.legange;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
 
 public class SelectPlayerItem extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
 
     private static final String PLAYER = "param1";
     private LinearLayout linearLayout;
-    // TODO: Rename and change types of parameters
+    private TextView playerTv;
+    public CheckBox playerCb;
 
-    private Player player;
+    public Player player;
 
     private RuleInterface mListener;
     private TextView textView;
@@ -37,6 +37,8 @@ public class SelectPlayerItem extends Fragment {
         return fragment;
     }
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,27 +53,22 @@ public class SelectPlayerItem extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-
-        View view = inflater.inflate(R.layout.item_score, container, false);
-        textView = (TextView) view.findViewById(R.id.textView);
+        View view = inflater.inflate(R.layout.item_select_player, container, false);
+        playerTv = (TextView) view.findViewById(R.id.player_tv);
+        playerCb = (CheckBox) view.findViewById(R.id.player_cb);
 
         if (player != null) {
             printName();
         }
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mListener.onScoreEnd();
-            }
-        });
+
         return view;
     }
 
    public void printName()
    {
-       textView.setText(player.getName());
+       playerTv.setText(player.getName());
+
    }
 
 

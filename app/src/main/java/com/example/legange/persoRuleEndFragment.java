@@ -1,6 +1,7 @@
 package com.example.legange;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,26 +15,28 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 
 
-public class SelectPlayerFragment extends Fragment implements RuleInterface {
+
+public class persoRuleEndFragment extends Fragment  {
 
 
     private static final String PLAYER = "param1";
     private static final String POINTS = "param2";
     private LinearLayout linearLayout;
     private int points;
-    private Button validerButton;
-    private ArrayList<Player> players;
-    private  ArrayList<SelectPlayerItem> selectPlayerItems;
+    private Button ouiButton;
+    private Button nonButton;
+    private Player player;
+
     private RuleInterface mListener;
 
-    public SelectPlayerFragment() {
+    public persoRuleEndFragment() {
         // Required empty public constructor
     }
 
-    public static SelectPlayerFragment newInstance(ArrayList<Player> players, int points) {
-        SelectPlayerFragment fragment = new SelectPlayerFragment();
+    public static persoRuleEndFragment newInstance(Player player, int points) {
+        persoRuleEndFragment fragment = new persoRuleEndFragment();
         Bundle args = new Bundle();
-        args.putSerializable(PLAYER, players);
+        args.putSerializable(PLAYER, player);
         args.putInt(POINTS,points);
         fragment.setArguments(args);
         return fragment;
@@ -43,7 +46,7 @@ public class SelectPlayerFragment extends Fragment implements RuleInterface {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            players = (ArrayList<Player>) getArguments().getSerializable(PLAYER);
+            player = (Player) getArguments().getSerializable(PLAYER);
             points = getArguments().getInt(POINTS);
         }
 
@@ -55,7 +58,7 @@ public class SelectPlayerFragment extends Fragment implements RuleInterface {
 
 
 
-        View view = inflater.inflate(R.layout.fragment_select_player, container, false);
+        View view = inflater.inflate(R.layout.fragment_perso_rule_end, container, false);
 
 
         view.setOnClickListener(new View.OnClickListener() {
@@ -64,37 +67,28 @@ public class SelectPlayerFragment extends Fragment implements RuleInterface {
                 mListener.onScoreEnd();
             }
         });
-        selectPlayerItems = new ArrayList<SelectPlayerItem>();
-        showScore();
-        validerButton = (Button) view.findViewById(R.id.valider_button);
-        validerButton.setOnClickListener(new View.OnClickListener() {
+
+        ouiButton = (Button) view.findViewById(R.id.oui_button);
+        ouiButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                onValiderClicked();
+                onOuiClicked();
+            }
+        });
+        nonButton = (Button) view.findViewById(R.id.oui_button);
+        nonButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onNonClicked();
             }
         });
         return view;
     }
 
-    public void showScore() {
-        FragmentManager fragmentManager = this.getChildFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        for (int i = 0; i < players.size(); i++) {
-            SelectPlayerItem selectPlayerItem = SelectPlayerItem.newInstance(players.get(i));
-            fragmentTransaction.add(R.id.players_linear_layout, selectPlayerItem);
-            selectPlayerItems.add(selectPlayerItem);
-        }
-        fragmentTransaction.commit();
-    }
-
-    private void onValiderClicked()
-    {
-        for(SelectPlayerItem selectPlayerItem : selectPlayerItems) {
-
-            if(selectPlayerItem.playerCb.isChecked())
-           Player.findPlayerByName(players,selectPlayerItem.player.getName()).incrementScore(points);
-        }
+   private void onOuiClicked() {
+        player.incrementScore(points);
         mListener.onRuleEnd();
-
+   }
+    private void onNonClicked() {
+        mListener.onRuleEnd();
     }
 
 
@@ -115,22 +109,8 @@ public class SelectPlayerFragment extends Fragment implements RuleInterface {
         mListener = null;
     }
 
-    @Override
-    public void onRuleEnd() {
 
-    }
-
-    @Override
-    public void onScoreEnd() {
-
-    }
-
-    @Override
-    public void onPlayerChecked() {
-
-    }
 
 
 }
-
 

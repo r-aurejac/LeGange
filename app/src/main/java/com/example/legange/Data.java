@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class Data {
 
-    public ArrayList<Rule> roles, announcements,persoRules,generalRules;
+    public ArrayList<Rule> roles, announcements,persoRules, groupRules;
    public Data()
    {
        roles = new ArrayList<>();
@@ -14,8 +14,8 @@ public class Data {
         setAnnouncement();
         persoRules = new ArrayList<>();
         setPersoRules();
-       generalRules = new ArrayList<>();
-       setGeneralRules();
+       groupRules = new ArrayList<>();
+       setGroupRules();
    }
 
    private void setRoles()
@@ -74,20 +74,54 @@ public class Data {
 
    private void setPersoRules()
    {
-
+       persoRules.add(new Rule("shifumi",
+           "player défit le joueur de son choix au shi fu mi",
+           2));
+       persoRules.add(new Rule("shifumi",
+               "player défit le joueur de son choix au shi fu mi",
+               0));
+       persoRules.add(new Rule("shifumi",
+               "player défit le joueur de son choix au shi fu mi",
+               0));
+       persoRules.add(new Rule("shifumi",
+               "player défit le joueur de son choix au shi fu mi",
+               0));
+       persoRules.add(new Rule("shifumi",
+               "player défit le joueur de son choix au shi fu mi",
+               0));
    }
+    public Rule getPersoRule(int index,String player)
+    {
+        Rule rule = persoRules.get(index);
+        String string = rule.getDescription().replace("player",player);
+        rule.setDescription(string);
+        return rule;
+    }
 
-   private void setGeneralRules()
+   private void setGroupRules()
    {
-       generalRules.add(new Rule("categorie",
+       groupRules.add(new Rule("categorie",
                " Choisit une catégorie et commence. Celui qui répète ou n'a plus d'idées perd 1 point",
                0));
-       generalRules.add(new Rule("rime",
+       groupRules.add(new Rule("rime",
                " Choisit une rime et commence. Celui qui répète ou n'a plus d'idées perd 1 point",
                0));
-       generalRules.add(new Rule("shot",
+       groupRules.add(new Rule("shot",
                " tournée de shot, chaque joueur qui prend un shot de pur gagne 1 point. l'alcool est choisis par",
                0));
+       groupRules.add(new Rule("mise",
+               "player choisit une catégorie, chacun donne le nombre d'élément de la catégorie qu'il peut citer, celui qui propose le nombre le plus élevé doit les citer ",
+               0));
+       groupRules.add(new Rule("mise",
+               "player choisit une catégorie, chacun donne le nombre d'élément de la catégorie qu'il peut citer, celui qui propose le nombre le plus élevé doit les citer ",
+               0));
 
+   }
+   public Rule getGroupRule(int index,String player)
+   {
+       Rule groupRule = groupRules.get(index);
+       String string = groupRule.getDescription().replace("player",player);
+       groupRule.setDescription(string);
+       return groupRule;
    }
 }
