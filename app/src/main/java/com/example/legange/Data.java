@@ -28,7 +28,8 @@ public class Data {
                0));
        roles.add(new Rule("chanceux",
                "player est le chanceux. Il commence avec 2 points supplémentaires, LA CHANCE.", 2));
-       roles.add(new Rule("guerrier Indien",
+
+       roles.add(new Rule("guerrier indien",
                "player est le guerrier Indien. Habitué du Gange, si il finit dernier il le partage avec l'avant dernier.",
                0));
        roles.add(new Rule("pirate",
@@ -61,13 +62,21 @@ public class Data {
        announcements.add(new Rule("fin",
                "player à perdu ce looseur sera purifié par le gange",
                0));
-       announcements.add(new Rule("fin",
-               "player à perdu ce looseur sera purifié par le gange mais étant un guerrier indien deter il patagera son gange avec ",
+       announcements.add(new Rule("fin2",
+               "player à perdu mais étant le guerrier Indien il peut enrichir le joueur player2 de sa culture en partageant son verre de Gange",
                0));
    }
 
     public Rule getAnnouncement(int index)
     {
+
+        Rule announcement = announcements.get(index);
+        return announcement;
+    }
+    public Rule getAnnouncement(int index, String player)
+    {
+        Rule role = roles.get(index);
+        String string = role.getDescription().replace("player",player);
         Rule announcement = announcements.get(index);
         return announcement;
     }

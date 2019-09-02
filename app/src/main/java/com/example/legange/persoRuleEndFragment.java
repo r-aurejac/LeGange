@@ -74,7 +74,7 @@ public class persoRuleEndFragment extends Fragment  {
                 onOuiClicked();
             }
         });
-        nonButton = (Button) view.findViewById(R.id.oui_button);
+        nonButton = (Button) view.findViewById(R.id.non_button);
         nonButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 onNonClicked();

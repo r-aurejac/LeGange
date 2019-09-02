@@ -2,8 +2,11 @@ package com.example.legange;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Random;
 
-public class Player implements Serializable {
+public class Player implements Serializable, Comparable {
 
     private String role;
 
@@ -65,4 +68,16 @@ public class Player implements Serializable {
         return null;
     }
 
+    public static Player getRandomPlayer(ArrayList<Player> players)
+    {
+        Random r = new Random();
+        return players.get( r.nextInt((players.size()-1 - 0) + 1) + 0);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+
+        Player player = (Player) o;
+        return (this.score - player.score);
+    }
 }

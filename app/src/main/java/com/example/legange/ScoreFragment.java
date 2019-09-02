@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class ScoreFragment extends Fragment {
@@ -67,11 +68,15 @@ public class ScoreFragment extends Fragment {
     }
 
     public void showScore() {
+        ArrayList<Player> sortedPlayers = new ArrayList<Player>();
+        sortedPlayers.addAll(players);
+        Collections.sort(sortedPlayers);
+        Collections.reverse(sortedPlayers);
         FragmentManager fragmentManager = this.getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.score_linear_layout, new ScoreItem());
-        for (int i = 0; i < players.size(); i++) {
-            fragmentTransaction.add(R.id.score_linear_layout, ScoreItem.newInstance(players.get(i)));
+        for (int i = 0; i < sortedPlayers.size(); i++) {
+            fragmentTransaction.add(R.id.score_linear_layout, ScoreItem.newInstance(sortedPlayers.get(i)));
 
         }
         fragmentTransaction.commit();

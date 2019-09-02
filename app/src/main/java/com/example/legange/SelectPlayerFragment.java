@@ -125,10 +125,7 @@ public class SelectPlayerFragment extends Fragment implements RuleInterface {
 
     }
 
-    @Override
-    public void onPlayerChecked() {
 
-    }
 
 
 }
