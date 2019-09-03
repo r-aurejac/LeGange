@@ -52,8 +52,8 @@ public class Data {
    private void setAnnouncement()
    {
        announcements.add(new Rule("intro",
-           "Bienvenu dans le Gange, chaque joueur va se voir attribuer un rôle puis va débuter une série de règles permettant de gagner ou de perdre des points." +
-                   "à la fin de la partie le juoeur avec le moins de points sera purifié par le Gange",
+           "Bienvenue dans le Gange, chaque joueur va se voir attribuer un rôle puis va débuter une série de règles permettant de gagner ou de perdre des points." +
+                   "à la fin de la partie le joueur avec le moins de points sera purifié par le Gange",
            0));
        announcements.add(new Rule("gange",
                "Chaque joueur verse la quantité qu'il désire de son verre dans le Gange. Si un toxique a été désigné il peu verser autre chose que son verre" +
@@ -84,20 +84,20 @@ public class Data {
    private void setPersoRules()
    {
        persoRules.add(new Rule("shifumi",
-           "player défit le joueur de son choix au shi fu mi",
+           "player défit le joueur de son choix au shi fu mi,il choisit combien de gorgées seront bu par le perdant",
            2));
+       persoRules.add(new Rule("pile ou face",
+               "player mise un nombre de gorgées et effectue un pile ou face, si il gagne il distribu si non il boit",
+               2));
        persoRules.add(new Rule("shifumi",
                "player défit le joueur de son choix au shi fu mi",
-               0));
+               2));
        persoRules.add(new Rule("shifumi",
                "player défit le joueur de son choix au shi fu mi",
-               0));
+               2));
        persoRules.add(new Rule("shifumi",
                "player défit le joueur de son choix au shi fu mi",
-               0));
-       persoRules.add(new Rule("shifumi",
-               "player défit le joueur de son choix au shi fu mi",
-               0));
+               2));
    }
     public Rule getPersoRule(int index,String player)
     {
@@ -111,19 +111,19 @@ public class Data {
    {
        groupRules.add(new Rule("categorie",
                " Choisit une catégorie et commence. Celui qui répète ou n'a plus d'idées perd 1 point",
-               0));
+               1));
        groupRules.add(new Rule("rime",
                " Choisit une rime et commence. Celui qui répète ou n'a plus d'idées perd 1 point",
-               0));
+               1));
        groupRules.add(new Rule("shot",
                " tournée de shot, chaque joueur qui prend un shot de pur gagne 1 point. l'alcool est choisis par",
-               0));
+               1));
        groupRules.add(new Rule("mise",
                "player choisit une catégorie, chacun donne le nombre d'élément de la catégorie qu'il peut citer, celui qui propose le nombre le plus élevé doit les citer ",
-               0));
-       groupRules.add(new Rule("mise",
-               "player choisit une catégorie, chacun donne le nombre d'élément de la catégorie qu'il peut citer, celui qui propose le nombre le plus élevé doit les citer ",
-               0));
+               1));
+       groupRules.add(new Rule("scribe",
+               " player est le juge, les autres joueurs écrivent une phrase chacun leur tour, celui qui écrit la phrase qui plaira le moins au juge perd",
+               1));
 
    }
    public Rule getGroupRule(int index,String player)
