@@ -1,22 +1,16 @@
 package com.example.legange;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import java.util.ArrayList;
 
-
-
-public class persoRuleEndFragment extends Fragment  {
+public class PersoRuleEndFragment extends Fragment  {
 
 
     private static final String PLAYER = "param1";
@@ -29,12 +23,12 @@ public class persoRuleEndFragment extends Fragment  {
 
     private RuleInterface mListener;
 
-    public persoRuleEndFragment() {
+    public PersoRuleEndFragment() {
         // Required empty public constructor
     }
 
-    public static persoRuleEndFragment newInstance(Player player, int points) {
-        persoRuleEndFragment fragment = new persoRuleEndFragment();
+    public static PersoRuleEndFragment newInstance(Player player, int points) {
+        PersoRuleEndFragment fragment = new PersoRuleEndFragment();
         Bundle args = new Bundle();
         args.putSerializable(PLAYER, player);
         args.putInt(POINTS,points);

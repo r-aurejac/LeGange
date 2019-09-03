@@ -60,10 +60,10 @@ public class Data {
                        "",
                0));
        announcements.add(new Rule("fin",
-               "player à perdu ce looseur sera purifié par le gange",
+               "player à le score le plus faible, il est l'élu, il doit être purifié par le Gange",
                0));
        announcements.add(new Rule("fin2",
-               "player à perdu mais étant le guerrier Indien il peut enrichir le joueur player2 de sa culture en partageant son verre de Gange",
+               "player  le score le plus faible, il est l'élu, mais étant le guerrier Indien il peut enrichir le joueur player2 de sa culture en partageant sa purification avec player2",
                0));
    }
 
@@ -75,10 +75,18 @@ public class Data {
     }
     public Rule getAnnouncement(int index, String player)
     {
-        Rule role = roles.get(index);
-        String string = role.getDescription().replace("player",player);
-        Rule announcement = announcements.get(index);
-        return announcement;
+        Rule rule = roles.get(index);
+        String string = rule.getDescription().replace("player",player);
+        rule.setDescription(string);
+        return rule;
+    }
+    public Rule getAnnouncement(int index, String player,String player2)
+    {
+        Rule rule = roles.get(index);
+        String string = rule.getDescription().replace("player",player);
+        string = string.replace("player2",player2);
+        rule.setDescription(string);
+        return rule;
     }
 
    private void setPersoRules()
@@ -111,10 +119,10 @@ public class Data {
    {
        groupRules.add(new Rule("categorie",
                " Choisit une catégorie et commence. Celui qui répète ou n'a plus d'idées perd 1 point",
-               1));
+               -1));
        groupRules.add(new Rule("rime",
                " Choisit une rime et commence. Celui qui répète ou n'a plus d'idées perd 1 point",
-               1));
+               -1));
        groupRules.add(new Rule("shot",
                " tournée de shot, chaque joueur qui prend un shot de pur gagne 1 point. l'alcool est choisis par",
                1));
@@ -123,7 +131,7 @@ public class Data {
                1));
        groupRules.add(new Rule("scribe",
                " player est le juge, les autres joueurs écrivent une phrase chacun leur tour, celui qui écrit la phrase qui plaira le moins au juge perd",
-               1));
+               -1));
 
    }
    public Rule getGroupRule(int index,String player)

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -25,7 +26,7 @@ public class SelectPlayerFragment extends Fragment implements RuleInterface {
     private ArrayList<Player> players;
     private  ArrayList<SelectPlayerItem> selectPlayerItems;
     private RuleInterface mListener;
-
+    private TextView textView;
     public SelectPlayerFragment() {
         // Required empty public constructor
     }
@@ -72,6 +73,12 @@ public class SelectPlayerFragment extends Fragment implements RuleInterface {
                 onValiderClicked();
             }
         });
+        textView = (TextView) view.findViewById(R.id.select_player_text);
+
+        if(points<0)
+            textView.setText("cocher le ou les perdants ");
+        else
+            textView.setText("cocher le ou les gagnants ");
         return view;
     }
 

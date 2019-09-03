@@ -46,13 +46,14 @@ public class Rule implements Serializable {
     {
         this.name = name;
         this.description = description;
-        this.points = type;
+        this.points = points;
     }
     public Rule(String name, String description,int points, int type)
     {
         this.name = name;
         this.description = description;
-        this.points = type;
+        this.points = points;
+        this.type = type;
     }
 
 }

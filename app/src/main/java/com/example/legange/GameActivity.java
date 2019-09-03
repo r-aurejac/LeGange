@@ -6,12 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,7 +19,7 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
     int ruleIndex = 0;
     int introIndex =0;
     boolean ruleChange = true;
-    boolean end = false;
+    boolean gameEnding = false;
     int groupRuleIndex = 0;
     int persoRuleIndex = 0;
     Rule ruleCache;
@@ -62,7 +58,7 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
     @Override
     public void onScoreEnd() {
 
-        if(end!=true)
+        if(!gameEnding)
         nextRule();
         else {
             Intent intent = MainActivity.newIntent(getApplicationContext());
@@ -131,7 +127,7 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
         if(introIndex == 2) {
             if(Player.findPlayerByRole(players,"pirate")!=null)
             ruleIndex = 3;
-            else ruleIndex = 3;
+            else ruleIndex = 7;
         }
     }
 
@@ -159,10 +155,11 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
     {
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.game_linear_layout, persoRuleEndFragment.newInstance(playerCache,(ruleCache.getPoints())));
+        fragmentTransaction.replace(R.id.game_linear_layout, PersoRuleEndFragment.newInstance(playerCache,(ruleCache.getPoints())));
         fragmentTransaction.commit();
         persoRuleIndex++;
         ruleIndex = 2;
+
     }
     private void showPlayerSelection()
     {
@@ -176,11 +173,13 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
 
     private void end()
     {
-        end = true;
+        gameEnding = true;
         Collections.sort(players);
         if(players.get(0).getRole().equals("guerrier indien"))
-        showTextRule(data.getAnnouncement(2,players.get(1).getName()));
+        showTextRule(data.getAnnouncement(2,players.get(0).getName(), players.get(1).getName()));
         else showTextRule(data.getAnnouncement(2,players.get(0).getName()));
+
+        ruleIndex =  2;
     }
 
     void nextRule() {

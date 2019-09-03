@@ -144,15 +144,22 @@ public class PirateFragment extends Fragment {
                     tvs[trap].setText("X");
                     alertDialog("piège placé");
                     turnIndex = 2;
+
                 }
                 else alertDialog("le piège ne peut pas être au même endroit que le trésor");
                 break;
 
             case 2:
+
+                if (attackerIndex==attackers.size())
+                    attackerIndex = 0;
+
                 if(i == trap) {
                     tvs[i].setText("perdu");
-                    tvs[0].setText(attackers.get(attackerIndex).getName() + " à perdu");
-                    alertDialog(attackers.get(attackerIndex).getName() + " à perdu");
+                    tvs[0].setText(attackers.get(attackerIndex).getName() + " à perdu il boit 5 gorgées");
+                    alertDialog(attackers.get(attackerIndex).getName() + " à perdu, il boit 5 gorgées");
+                    Player.findPlayerByName(players,attackers.get(attackerIndex).getName()).incrementScore(-1);
+                    Player.findPlayerByRole(players,"pirate").incrementScore(2);
                     mListener.onRuleEnd();
                 }
                 else if(i == treasure) {
@@ -163,11 +170,13 @@ public class PirateFragment extends Fragment {
                     mListener.onRuleEnd();
                 }
                 else {
+                    attackerIndex++;
+                    tvs[0].setText("Au tour de " + attackers.get(attackerIndex).getName());
                     tvs[i].setText("vide");
+
                 }
-                attackerIndex++;
-                if (attackerIndex==attackers.size())
-                    attackerIndex = 0;
+
+
 
                 break;
 
