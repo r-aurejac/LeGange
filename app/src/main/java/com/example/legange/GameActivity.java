@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 
@@ -26,6 +27,7 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
     Player playerCache;
     private final static String PLAYERS = "players";
     ArrayList<Player> players;
+    ArrayList<Rule> roles,Rules;
     Data data;
     LinearLayout gameLinearLayout;
     TableLayout scoreTableLayout;
@@ -52,18 +54,19 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
 
     @Override
     public void onRuleEnd() {
-        nextRule();
+            nextRule();
     }
 
     @Override
     public void onScoreEnd() {
 
-        if(!gameEnding)
-        nextRule();
-        else {
-            Intent intent = MainActivity.newIntent(getApplicationContext());
-            getApplicationContext().startActivity(intent);
-        }
+            nextRule();
+    }
+
+    private void organizeRules()
+    {
+        for(int i = 0; i<players.size();i++)
+            roles.add(data.getRole(players.get(i).getName(),i));
     }
 
 
@@ -81,6 +84,7 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
         if(roleIndex != players.size()) {
             Rule role = data.getRole(players.get(roleIndex).getName(),roleIndex);
             players.get(roleIndex).setRole(role.getName());
+            players.get(roleIndex).incrementScore(role.getPoints());
             showTextRule(role);
             roleIndex++;
         }
@@ -173,50 +177,60 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
 
     private void end()
     {
-        gameEnding = true;
+
         Collections.sort(players);
         if(players.get(0).getRole().equals("guerrier indien"))
         showTextRule(data.getAnnouncement(2,players.get(0).getName(), players.get(1).getName()));
         else showTextRule(data.getAnnouncement(2,players.get(0).getName()));
+        gameEnding = true;
 
-        ruleIndex =  2;
     }
 
     void nextRule() {
 
-        if(persoRuleIndex >= players.size())
-            end();
 
-        switch (ruleIndex) {
-            case 0 :
-                intro();
-                break;
-            case 1:
-                roleAttribution();
-                break;
+            switch (ruleIndex) {
+                case 0:
+                    intro();
+                    break;
+                case 1:
+                    roleAttribution();
+                    break;
 
-            case 2:
-                showScore();
-                break;
+                case 2:
+                    showScore();
+                    break;
 
-            case 3:
-                showPirateRule();
-                break;
+                case 3:
+                    showPirateRule();
+                    break;
 
-            case 4:
-                showPlayerSelection();
-                break;
+                case 4:
+                    showPlayerSelection();
+                    break;
 
-            case 5:
-                showPersoRuleEnd();
-            break;
-            case 6:
-                persoRule();
-                break;
-            case 7:
-                groupRule();
-                break;
-        }
+                case 5:
+                    showPersoRuleEnd();
+                    break;
+                case 6:
+                    persoRule();
+                    break;
+                case 7:
+                    groupRule();
+                    break;
+
+                case 8 :
+                    Log.d("TAG","case 8");
+                    end();
+                    break;
+
+                case 9 :
+                    Log.d("TAG","case 9");
+                    Intent intent = MainActivity.newIntent(getApplicationContext());
+                    getApplicationContext().startActivity(intent);
+                    break;
+            }
+
     }
 
 

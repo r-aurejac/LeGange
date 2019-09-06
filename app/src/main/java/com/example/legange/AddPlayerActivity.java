@@ -66,11 +66,11 @@ public class AddPlayerActivity extends AppCompatActivity {
 
     private void start()
     {
-        if (joueurs.size()>1) {
+        if (joueurs.size()>2) {
             Intent intent = GameActivity.newIntent(getApplicationContext(), joueurs);
             getApplicationContext().startActivity(intent);
         }
-        else alertDialog("Il faut au moins 2 kheys pour jouer");
+        else alertDialog("Il faut au moins 3 kheys pour jouer");
     }
     private boolean nameIsValid()
     {

@@ -170,9 +170,10 @@ public class PirateFragment extends Fragment {
                     mListener.onRuleEnd();
                 }
                 else {
-                    attackerIndex++;
+
                     tvs[0].setText("Au tour de " + attackers.get(attackerIndex).getName());
                     tvs[i].setText("vide");
+                    attackerIndex++;
 
                 }
 
