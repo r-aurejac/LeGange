@@ -79,10 +79,10 @@ public class PersoRuleEndFragment extends Fragment  {
 
    private void onOuiClicked() {
         player.incrementScore(points);
-        mListener.onRuleEnd();
+        mListener.onPointsAttributionEnd();
    }
     private void onNonClicked() {
-        mListener.onRuleEnd();
+        mListener.onPointsAttributionEnd();
     }
 
 

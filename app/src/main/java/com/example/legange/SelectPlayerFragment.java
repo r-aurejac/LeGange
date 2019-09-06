@@ -15,7 +15,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class SelectPlayerFragment extends Fragment implements RuleInterface {
+public class SelectPlayerFragment extends Fragment {
 
 
     private static final String PLAYER = "param1";
@@ -100,7 +100,7 @@ public class SelectPlayerFragment extends Fragment implements RuleInterface {
             if(selectPlayerItem.playerCb.isChecked())
            Player.findPlayerByName(players,selectPlayerItem.player.getName()).incrementScore(points);
         }
-        mListener.onRuleEnd();
+        mListener.onPointsAttributionEnd();
 
     }
 
@@ -122,15 +122,6 @@ public class SelectPlayerFragment extends Fragment implements RuleInterface {
         mListener = null;
     }
 
-    @Override
-    public void onRuleEnd() {
-
-    }
-
-    @Override
-    public void onScoreEnd() {
-
-    }
 
 
 

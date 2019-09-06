@@ -15,8 +15,18 @@ import java.util.Collections;
 
 public class GameActivity extends AppCompatActivity implements RuleInterface {
 
+    private static final int ANNOUNCEMENT = 0;
+    private static final int ROLE = 1;
+    private static final int GROUP = 2;
+    private static final int PERSO = 3;
+    private static final int WRITE = 4;
+    private static final int END_ANNOUNCEMENT = 5;
     LinearLayout linearLayout;
     int roleIndex = 0;
+    boolean announcement = true;
+    int announcementIndex = 0;
+    boolean roleAttribution = false;
+    boolean rulesPlaying =false;
     int ruleIndex = 0;
     int introIndex =0;
     boolean ruleChange = true;
@@ -24,10 +34,10 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
     int groupRuleIndex = 0;
     int persoRuleIndex = 0;
     Rule ruleCache;
-    Player playerCache;
+
     private final static String PLAYERS = "players";
     ArrayList<Player> players;
-    ArrayList<Rule> roles,Rules;
+    ArrayList<Rule> roles,rules;
     Data data;
     LinearLayout gameLinearLayout;
     TableLayout scoreTableLayout;
@@ -47,14 +57,26 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
         data = new Data();
         gameLinearLayout = (LinearLayout) findViewById(R.id.game_linear_layout);
         Collections.shuffle(players);
-      nextRule();
+        organizeRules();
+
 
     }
 
 
     @Override
     public void onRuleEnd() {
-            nextRule();
+            if(ruleCache.getType() == GROUP)
+                showPlayerSelection();
+            else if(ruleCache.getType() == PERSO)
+                showPersoRuleEnd();
+            else if(ruleCache.getType() == ANNOUNCEMENT)
+                nextRule();
+            else if(ruleCache.getType() == ROLE)
+                nextRule();
+            else if(ruleCache.getType() == END_ANNOUNCEMENT)
+                showScore();
+
+
     }
 
     @Override
@@ -63,10 +85,52 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
             nextRule();
     }
 
+    @Override
+    public void onPointsAttributionEnd() {
+        showScore();
+    }
+
     private void organizeRules()
     {
-        for(int i = 0; i<players.size();i++)
-            roles.add(data.getRole(players.get(i).getName(),i));
+        roles = new ArrayList<>();
+        rules = new ArrayList<>();
+        for(int i = 0; i<players.size();i++) {
+            roles.add(data.getRole(players.get(i), i));
+            rules.add(data.getGroupRule(players.get(i), i));
+            rules.add(data.getPersoRule(players.get(i), i));
+        }
+
+
+        nextRule();
+    }
+
+    void nextRule() {
+        if (announcementIndex<2) {
+            ruleCache = data.getAnnouncement(announcementIndex);
+            showTextRule(ruleCache);
+            announcementIndex++;
+        }
+        else if (roleIndex<players.size()) {
+            ruleCache = roles.get(roleIndex);
+            ruleCache.getRulePlayers().get(0).incrementScore(ruleCache.getPoints());
+            showTextRule(ruleCache);
+
+            roleIndex++;
+        }
+        else if (ruleIndex<rules.size()) {
+            ruleCache = rules.get(ruleIndex);
+            showTextRule(ruleCache);
+            ruleIndex++;
+            Log.d("test on rule end", String.valueOf(ruleIndex));
+        }
+
+        else if(gameEnding == false)
+            end();
+
+        else { Intent intent = MainActivity.newIntent(getApplicationContext());
+            getApplicationContext().startActivity(intent);}
+
+
     }
 
 
@@ -79,21 +143,6 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
     }
 
 
-    private void roleAttribution()
-    {
-        if(roleIndex != players.size()) {
-            Rule role = data.getRole(players.get(roleIndex).getName(),roleIndex);
-            players.get(roleIndex).setRole(role.getName());
-            players.get(roleIndex).incrementScore(role.getPoints());
-            showTextRule(role);
-            roleIndex++;
-        }
-        else {
-            ruleIndex = 0;
-            nextRule();
-        }
-
-    }
     private void showScore()
     {
         gameLinearLayout.removeAllViews();
@@ -101,14 +150,7 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.game_linear_layout, ScoreFragment.newInstance(players));
         fragmentTransaction.commit();
-        if(ruleChange) {
-            ruleIndex = 6;
-            ruleChange = false;
-        }
-        else {
-            ruleIndex = 7;
-            ruleChange = true;
-        }
+
     }
 
     private void showPirateRule()
@@ -117,52 +159,17 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.game_linear_layout, PirateFragment.newInstance(players,"test"));
                 fragmentTransaction.commit();
-                ruleIndex = 2;
 
     }
 
 
-    private void intro()
-    {
-        showTextRule(data.getAnnouncement(introIndex));
-        introIndex++;
-        if(introIndex == 1)
-            ruleIndex = 1;
-        if(introIndex == 2) {
-            if(Player.findPlayerByRole(players,"pirate")!=null)
-            ruleIndex = 3;
-            else ruleIndex = 7;
-        }
-    }
-
-    private void groupRule()
-    {
-        if(groupRuleIndex<players.size()) {
-            ruleCache = data.getGroupRule(persoRuleIndex, players.get(groupRuleIndex).getName());
-            playerCache = Player.getRandomPlayer(players);
-            showTextRule(ruleCache);
-            groupRuleIndex++;
-            ruleIndex = 4;
-        }
-    }
-    private void persoRule()
-    {
-        if(groupRuleIndex<players.size()) {
-            ruleCache = data.getPersoRule(persoRuleIndex, players.get(persoRuleIndex).getName());
-            playerCache = players.get(persoRuleIndex);
-            showTextRule(ruleCache);
-            ruleIndex = 5;
-        }
-
-    }
     private void showPersoRuleEnd()
     {
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.game_linear_layout, PersoRuleEndFragment.newInstance(playerCache,(ruleCache.getPoints())));
+        fragmentTransaction.replace(R.id.game_linear_layout, PersoRuleEndFragment.newInstance(ruleCache.getRulePlayers().get(0),(ruleCache.getPoints())));
         fragmentTransaction.commit();
-        persoRuleIndex++;
-        ruleIndex = 2;
+
 
     }
     private void showPlayerSelection()
@@ -171,7 +178,6 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.game_linear_layout, SelectPlayerFragment.newInstance(players,ruleCache.getPoints()));
         fragmentTransaction.commit();
-        ruleIndex = 2;
 
     }
 
@@ -180,58 +186,20 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
 
         Collections.sort(players);
         if(players.get(0).getRole().equals("guerrier indien"))
-        showTextRule(data.getAnnouncement(2,players.get(0).getName(), players.get(1).getName()));
-        else showTextRule(data.getAnnouncement(2,players.get(0).getName()));
-        gameEnding = true;
+        {
+            ruleCache=data.getEndAnnouncement(0,players.get(0), players.get(1));
+            showTextRule(ruleCache);
+        }
+        else
+        {
+            ruleCache = data.getEndAnnouncement(1,players.get(0));
+            showTextRule(ruleCache);
+        }
+
+        gameEnding =true;
 
     }
 
-    void nextRule() {
-
-
-            switch (ruleIndex) {
-                case 0:
-                    intro();
-                    break;
-                case 1:
-                    roleAttribution();
-                    break;
-
-                case 2:
-                    showScore();
-                    break;
-
-                case 3:
-                    showPirateRule();
-                    break;
-
-                case 4:
-                    showPlayerSelection();
-                    break;
-
-                case 5:
-                    showPersoRuleEnd();
-                    break;
-                case 6:
-                    persoRule();
-                    break;
-                case 7:
-                    groupRule();
-                    break;
-
-                case 8 :
-                    Log.d("TAG","case 8");
-                    end();
-                    break;
-
-                case 9 :
-                    Log.d("TAG","case 9");
-                    Intent intent = MainActivity.newIntent(getApplicationContext());
-                    getApplicationContext().startActivity(intent);
-                    break;
-            }
-
-    }
 
 
 }
