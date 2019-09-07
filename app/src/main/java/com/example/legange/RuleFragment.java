@@ -20,7 +20,7 @@ public class RuleFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private Rule rule;
     private ArrayList<Player> players;
-    private TextView ruleText;
+    private TextView ruleText,titleText;
     private RuleInterface mListener;
 
     public RuleFragment() {
@@ -61,6 +61,14 @@ public class RuleFragment extends Fragment {
         });
         ruleText = (TextView) view.findViewById(R.id.rule_text_view);
         ruleText.setText(rule.getDescription());
+        ruleText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onRuleEnd();
+            }
+        });
+        titleText =(TextView) view.findViewById(R.id.title_text_view);
+        titleText.setText(rule.getName());
         return view;
     }
 

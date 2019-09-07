@@ -4,6 +4,7 @@ public interface RuleInterface {
     void onRuleEnd();
     void onScoreEnd();
     void onPointsAttributionEnd();
-
+    void onPirateRuleEnd();
+    void onWriitingRuleEnd();
 
 }

@@ -28,7 +28,7 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
     boolean roleAttribution = false;
     boolean rulesPlaying =false;
     int ruleIndex = 0;
-    int introIndex =0;
+    boolean pirateRuleIsDone = false;
     boolean ruleChange = true;
     boolean gameEnding = false;
     int groupRuleIndex = 0;
@@ -65,7 +65,7 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
 
     @Override
     public void onRuleEnd() {
-            if(ruleCache.getType() == GROUP)
+            if( (ruleCache.getType() == GROUP))
                 showPlayerSelection();
             else if(ruleCache.getType() == PERSO)
                 showPersoRuleEnd();
@@ -75,6 +75,9 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
                 nextRule();
             else if(ruleCache.getType() == END_ANNOUNCEMENT)
                 showScore();
+            else if(ruleCache.getType() == WRITE)
+                showWritingRule(ruleCache);
+
 
 
     }
@@ -82,12 +85,21 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
     @Override
     public void onScoreEnd() {
 
-            nextRule();
+        nextRule();
     }
-
     @Override
     public void onPointsAttributionEnd() {
         showScore();
+    }
+
+    @Override
+    public void onPirateRuleEnd() {
+        nextRule();
+    }
+
+    @Override
+    public void onWriitingRuleEnd() {
+        showPlayerSelection();
     }
 
     private void organizeRules()
@@ -96,35 +108,51 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
         rules = new ArrayList<>();
         for(int i = 0; i<players.size();i++) {
             roles.add(data.getRole(players.get(i), i));
-            rules.add(data.getGroupRule(players.get(i), i));
             rules.add(data.getPersoRule(players.get(i), i));
         }
+        int j = 0;
+        for(int i = 0; i<8; i++)
+        {
+            rules.add(data.getGroupRule(Player.getRandomPlayer(players), i));
+
+        }
+        Collections.shuffle(rules);
 
 
         nextRule();
     }
 
     void nextRule() {
-        if (announcementIndex<2) {
+        if (announcementIndex==0) {
             ruleCache = data.getAnnouncement(announcementIndex);
-            showTextRule(ruleCache);
+            showRule(ruleCache);
             announcementIndex++;
         }
         else if (roleIndex<players.size()) {
             ruleCache = roles.get(roleIndex);
             ruleCache.getRulePlayers().get(0).incrementScore(ruleCache.getPoints());
-            showTextRule(ruleCache);
+            showRule(ruleCache);
 
             roleIndex++;
         }
+        else if((announcementIndex==1))
+        {
+            ruleCache = data.getAnnouncement(announcementIndex);
+            showRule(ruleCache);
+            announcementIndex++;
+        }
+        else if (thereIsAPirate() && (!pirateRuleIsDone))
+        {
+            showPirateRule();
+        }
         else if (ruleIndex<rules.size()) {
             ruleCache = rules.get(ruleIndex);
-            showTextRule(ruleCache);
+            showRule(ruleCache);
             ruleIndex++;
-            Log.d("test on rule end", String.valueOf(ruleIndex));
+            Log.d("pirate", String.valueOf(thereIsAPirate()));
         }
 
-        else if(gameEnding == false)
+        else if(!gameEnding)
             end();
 
         else { Intent intent = MainActivity.newIntent(getApplicationContext());
@@ -133,12 +161,29 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
 
     }
 
+    private boolean thereIsAPirate()
+    {
+        for(Player player : players)
+        {
+            Log.d("pirate", player.getRole());
+            if(player.getRole().equals("pirate"))
+                return true;
+        }
+        return false;
+    }
 
-    private void showTextRule(Rule rule)
+    private void showRule(Rule rule)
     {
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.game_linear_layout, RuleFragment.newInstance(rule, players));
+        fragmentTransaction.commit();
+    }
+    private void showWritingRule(Rule rule)
+    {
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.game_linear_layout, WriteFragment.newInstance(rule, players));
         fragmentTransaction.commit();
     }
 
@@ -159,6 +204,7 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.game_linear_layout, PirateFragment.newInstance(players,"test"));
                 fragmentTransaction.commit();
+                pirateRuleIsDone = true;
 
     }
 
@@ -185,19 +231,36 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
     {
 
         Collections.sort(players);
+
+        //if(thereIsEquality())
+
+
         if(players.get(0).getRole().equals("guerrier indien"))
         {
-            ruleCache=data.getEndAnnouncement(0,players.get(0), players.get(1));
-            showTextRule(ruleCache);
+            ruleCache=data.getEndAnnouncement(1,players.get(0), players.get(1));
+            showRule(ruleCache);
         }
         else
         {
-            ruleCache = data.getEndAnnouncement(1,players.get(0));
-            showTextRule(ruleCache);
+            ruleCache = data.getEndAnnouncement(0,players.get(0));
+            showRule(ruleCache);
         }
 
         gameEnding =true;
 
+    }
+
+    private boolean thereIsEquality()
+    {
+        int count = 0;
+        for(int i = 1; i<players.size(); i++)
+        {
+            if(players.get(0).getScore()==players.get(i).getScore())
+                count++;
+        }
+        if (count>0)
+            return true;
+        else return false;
     }
 
 

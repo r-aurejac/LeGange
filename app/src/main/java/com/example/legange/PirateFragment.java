@@ -25,7 +25,7 @@ public class PirateFragment extends Fragment {
     private ArrayList<Player> attackers;
     private String mParam2;
     private  TextView tvs[];
-    int turn = 1;
+    private Player pirate;
     private RuleInterface mListener;
     int turnIndex = 0;
     int treasure = 0;
@@ -72,8 +72,9 @@ public class PirateFragment extends Fragment {
         for(int i = 0; i<players.size();i++) {
             if (!players.get(i).getRole().equals("pirate"))
                 attackers.add(players.get(i));
-        }
 
+        }
+        pirate = Player.findPlayerByRole(players,"pirate");
         initViews(view);
 
 
@@ -123,14 +124,14 @@ public class PirateFragment extends Fragment {
            });
            tvs[i].setText("X");
        }
-       tvs[0].setText("le pirate doit cacher son trésor");
+       tvs[0].setText( pirate.getName() + " doit cacher son trésor");
    }
 
     private void viewClicked(int i)
     {
         switch (turnIndex) {
             case 0 :
-                tvs[0].setText("le pirate doit placer son piège");
+                tvs[0].setText(pirate.getName() + " doit placer son piège");
                 tvs[i].setText("tresor");
                 treasure = i;
                 turnIndex = 1;
@@ -151,39 +152,36 @@ public class PirateFragment extends Fragment {
 
             case 2:
 
-                if (attackerIndex==attackers.size())
-                    attackerIndex = 0;
+
 
                 if(i == trap) {
                     tvs[i].setText("perdu");
                     tvs[0].setText(attackers.get(attackerIndex).getName() + " à perdu il boit 5 gorgées");
                     alertDialog(attackers.get(attackerIndex).getName() + " à perdu, il boit 5 gorgées");
-                    Player.findPlayerByName(players,attackers.get(attackerIndex).getName()).incrementScore(-1);
-                    Player.findPlayerByRole(players,"pirate").incrementScore(2);
-                    mListener.onRuleEnd();
+                    players.get(attackerIndex).incrementScore(-1);
+                    pirate.incrementScore(1);
+                    mListener.onPirateRuleEnd();
                 }
                 else if(i == treasure) {
                     tvs[i].setText("gagné");
                     tvs[0].setText(attackers.get(attackerIndex).getName() + " à gagné");
                     alertDialog(attackers.get(attackerIndex).getName() + " à gagné");
-                    Player.findPlayerByName(players,attackers.get(attackerIndex).getName()).incrementScore(2);
-                    mListener.onRuleEnd();
+                    players.get(attackerIndex-1).incrementScore(1);
+                    mListener.onPirateRuleEnd();
                 }
                 else {
-
-                    tvs[0].setText("Au tour de " + attackers.get(attackerIndex).getName());
+                    tvs[0].setText("Au tour de " + attackers.get(attackerIndex+1).getName());
                     tvs[i].setText("vide");
-                    attackerIndex++;
 
                 }
-
+                attackerIndex++;
+                if (attackerIndex==attackers.size())
+                    attackerIndex = 0;
 
 
                 break;
 
-            case 3:
 
-                break;
         }
 
     }
