@@ -40,22 +40,22 @@ public class Rule implements Serializable {
 
     private int points;
 
-    public int getType() {
-        return type;
+    public int getNextScreen() {
+        return nextScreen;
     }
 
-    private int type;
+    private int nextScreen;
     private static final int ROLE_ATTRIBUTION = 0;
     private static final int TEXT = 1;
 
 
 
-    public Rule(String name, String description,int points, int type)
+    public Rule(String name, String description,int points, int nextScreen)
     {
         this.name = name;
         this.description = description;
         this.points = points;
-        this.type = type;
+        this.nextScreen = nextScreen;
         rulePlayers = new ArrayList<>();
     }
 

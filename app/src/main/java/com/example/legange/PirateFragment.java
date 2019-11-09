@@ -4,9 +4,11 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,11 +29,12 @@ public class PirateFragment extends Fragment {
     private  TextView tvs[];
     private Player pirate;
     private RuleInterface mListener;
+    private String name;
     int turnIndex = 0;
     int treasure = 0;
     int trap = 0;
     int attackerIndex = 0;
-
+    LinearLayout linearLayout;
     public PirateFragment() {
         // Required empty public constructor
     }
@@ -68,6 +71,7 @@ public class PirateFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_pirate, container, false);
+        linearLayout = view.findViewById(R.id.linear_layout);
         attackers = new ArrayList<Player>();
         for(int i = 0; i<players.size();i++) {
             if (!players.get(i).getRole().equals("pirate"))
@@ -127,6 +131,39 @@ public class PirateFragment extends Fragment {
        tvs[0].setText( pirate.getName() + " doit cacher son trésor");
    }
 
+   private void end1()
+    {
+        linearLayout.removeAllViews();
+        TextView tv = new TextView(getContext());
+        String string = name + " à perdu il boit 2 gorgées, le pirate gagne 2 points";
+        tv.setText(string);
+        tv.setGravity(Gravity.CENTER);
+        tv.setTextSize(25);
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onPirateRuleEnd();
+            }
+        });
+        linearLayout.addView(tv);
+    }
+    private void end2()
+    {
+        linearLayout.removeAllViews();
+        TextView tv = new TextView(getContext());
+        String string = name + " à gagné il distribue 2 gorgées et gagne 2 points";
+        tv.setText(string);
+        tv.setGravity(Gravity.CENTER);
+        tv.setTextSize(25);
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onPirateRuleEnd();
+            }
+        });
+        linearLayout.addView(tv);
+    }
+
     private void viewClicked(int i)
     {
         switch (turnIndex) {
@@ -152,37 +189,39 @@ public class PirateFragment extends Fragment {
 
             case 2:
 
-
+                if (attackerIndex==attackers.size())
+                    attackerIndex = 0;
 
                 if(i == trap) {
                     tvs[i].setText("perdu");
-                    tvs[0].setText(attackers.get(attackerIndex).getName() + " à perdu il boit 5 gorgées");
-                    alertDialog(attackers.get(attackerIndex).getName() + " à perdu, il boit 5 gorgées");
+                    name = attackers.get(attackerIndex).getName();
                     players.get(attackerIndex).incrementScore(-1);
                     pirate.incrementScore(1);
-                    mListener.onPirateRuleEnd();
+                    end1();
                 }
                 else if(i == treasure) {
                     tvs[i].setText("gagné");
-                    tvs[0].setText(attackers.get(attackerIndex).getName() + " à gagné");
-                    alertDialog(attackers.get(attackerIndex).getName() + " à gagné");
-                    players.get(attackerIndex-1).incrementScore(1);
-                    mListener.onPirateRuleEnd();
+                    name = attackers.get(attackerIndex).getName();
+                    players.get(attackerIndex).incrementScore(1);
+                    end2();
                 }
                 else {
-                    tvs[0].setText("Au tour de " + attackers.get(attackerIndex+1).getName());
+                    int j = attackerIndex+1;
+                    if (j==attackers.size())
+                        j= 0;
+                    tvs[0].setText("Au tour de " + attackers.get(j).getName());
                     tvs[i].setText("vide");
 
                 }
                 attackerIndex++;
-                if (attackerIndex==attackers.size())
-                    attackerIndex = 0;
 
 
                 break;
 
 
         }
+
+
 
     }
     private void alertDialog(String text) {

@@ -6,5 +6,6 @@ public interface RuleInterface {
     void onPointsAttributionEnd();
     void onPirateRuleEnd();
     void onWriitingRuleEnd();
+    void onBlackJackEnd();
 
 }

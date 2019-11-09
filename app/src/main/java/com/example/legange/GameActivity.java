@@ -15,30 +15,31 @@ import java.util.Collections;
 
 public class GameActivity extends AppCompatActivity implements RuleInterface {
 
-    private static final int ANNOUNCEMENT = 0;
-    private static final int ROLE = 1;
+    private static final int UNKNOWN = 0;
+    private static final int PIRATE = 1;
     private static final int GROUP = 2;
     private static final int PERSO = 3;
     private static final int WRITE = 4;
-    private static final int END_ANNOUNCEMENT = 5;
+    private static final int SCORE = 5;
+    private  static  final int GIFT = 6;
+    private  static  final int BLACKJACK= 7;
+
     LinearLayout linearLayout;
     int roleIndex = 0;
-    boolean announcement = true;
+
     int announcementIndex = 0;
-    boolean roleAttribution = false;
-    boolean rulesPlaying =false;
+
     int ruleIndex = 0;
     boolean pirateRuleIsDone = false;
-    boolean ruleChange = true;
+    boolean enfantRuleIsDone = false;
     boolean gameEnding = false;
-    int groupRuleIndex = 0;
-    int persoRuleIndex = 0;
+
     Rule ruleCache;
 
     private final static String PLAYERS = "players";
     ArrayList<Player> players;
     ArrayList<Rule> roles,rules;
-    Data data;
+    RuleData ruleData;
     LinearLayout gameLinearLayout;
     TableLayout scoreTableLayout;
     public static Intent newIntent(Context context, ArrayList<Player> players) {
@@ -54,7 +55,7 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
         if (getIntent() != null) {
             players = (ArrayList<Player>) getIntent().getSerializableExtra(PLAYERS);
         }
-        data = new Data();
+        ruleData = new RuleData();
         gameLinearLayout = (LinearLayout) findViewById(R.id.game_linear_layout);
         Collections.shuffle(players);
         organizeRules();
@@ -65,18 +66,22 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
 
     @Override
     public void onRuleEnd() {
-            if( (ruleCache.getType() == GROUP))
+            if( (ruleCache.getNextScreen() == GROUP))
                 showPlayerSelection();
-            else if(ruleCache.getType() == PERSO)
+            else if(ruleCache.getNextScreen() == PERSO)
                 showPersoRuleEnd();
-            else if(ruleCache.getType() == ANNOUNCEMENT)
+            else if(ruleCache.getNextScreen() == UNKNOWN)
                 nextRule();
-            else if(ruleCache.getType() == ROLE)
-                nextRule();
-            else if(ruleCache.getType() == END_ANNOUNCEMENT)
+            else if(ruleCache.getNextScreen() == SCORE)
                 showScore();
-            else if(ruleCache.getType() == WRITE)
+            else if(ruleCache.getNextScreen() == WRITE)
                 showWritingRule(ruleCache);
+            else if(ruleCache.getNextScreen() == BLACKJACK)
+                showBlackJack(ruleCache);
+            else if(ruleCache.getNextScreen() == GIFT)
+               openGift();
+            else if(ruleCache.getNextScreen() == PIRATE)
+                showPirateRule();
 
 
 
@@ -102,20 +107,33 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
         showPlayerSelection();
     }
 
+    @Override
+    public void onBlackJackEnd() {
+        showPlayerSelection();
+    }
+
     private void organizeRules()
     {
+        RoleData roleData = new RoleData();
+
+        int k =0;
         roles = new ArrayList<>();
         rules = new ArrayList<>();
         for(int i = 0; i<players.size();i++) {
-            roles.add(data.getRole(players.get(i), i));
-            rules.add(data.getPersoRule(players.get(i), i));
+            roles.add(roleData.getRole(players.get(i), i));
+            rules.add(ruleData.getPersoRule(players.get(i), i));
+            k++;
+        }
+        for(int i = k; i< ruleData.persoRules.size(); i++) {
+            rules.add(ruleData.getPersoRule(Player.getRandomPlayer(players), i));
         }
         int j = 0;
-        for(int i = 0; i<8; i++)
+        for(int i = 0; i< ruleData.groupRules.size(); i++)
         {
-            rules.add(data.getGroupRule(Player.getRandomPlayer(players), i));
+            rules.add(ruleData.getGroupRule(Player.getRandomPlayer(players), i));
 
         }
+        rules.addAll(roleData.getRoleRules(players));
         Collections.shuffle(rules);
 
 
@@ -124,7 +142,8 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
 
     void nextRule() {
         if (announcementIndex==0) {
-            ruleCache = data.getAnnouncement(announcementIndex);
+            AnnouncementData ad = new AnnouncementData();
+            ruleCache = ad.getAnnouncement(announcementIndex);
             showRule(ruleCache);
             announcementIndex++;
         }
@@ -137,19 +156,17 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
         }
         else if((announcementIndex==1))
         {
-            ruleCache = data.getAnnouncement(announcementIndex);
+            AnnouncementData ad = new AnnouncementData();
+            ruleCache = ad.getAnnouncement(announcementIndex);
             showRule(ruleCache);
             announcementIndex++;
         }
-        else if (thereIsAPirate() && (!pirateRuleIsDone))
-        {
-            showPirateRule();
-        }
+
         else if (ruleIndex<rules.size()) {
             ruleCache = rules.get(ruleIndex);
             showRule(ruleCache);
             ruleIndex++;
-            Log.d("pirate", String.valueOf(thereIsAPirate()));
+
         }
 
         else if(!gameEnding)
@@ -161,16 +178,6 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
 
     }
 
-    private boolean thereIsAPirate()
-    {
-        for(Player player : players)
-        {
-            Log.d("pirate", player.getRole());
-            if(player.getRole().equals("pirate"))
-                return true;
-        }
-        return false;
-    }
 
     private void showRule(Rule rule)
     {
@@ -186,7 +193,13 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
         fragmentTransaction.replace(R.id.game_linear_layout, WriteFragment.newInstance(rule, players));
         fragmentTransaction.commit();
     }
-
+    private void showBlackJack(Rule rule)
+    {
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.game_linear_layout, BlackJackFragment.newInstance(players));
+        fragmentTransaction.commit();
+    }
 
     private void showScore()
     {
@@ -227,27 +240,35 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
 
     }
 
+
+
     private void end()
     {
 
         Collections.sort(players);
 
         //if(thereIsEquality())
-
+        AnnouncementData ad = new AnnouncementData();
 
         if(players.get(0).getRole().equals("guerrier indien"))
         {
-            ruleCache=data.getEndAnnouncement(1,players.get(0), players.get(1));
+            ruleCache= ad.getEndAnnouncement(1,players.get(0), players.get(1));
             showRule(ruleCache);
         }
         else
         {
-            ruleCache = data.getEndAnnouncement(0,players.get(0));
+            ruleCache = ad.getEndAnnouncement(0,players.get(0));
             showRule(ruleCache);
         }
 
         gameEnding =true;
 
+    }
+
+    private void openGift()
+    {
+        ruleCache = ruleData.getGift();
+        showRule(ruleCache);
     }
 
     private boolean thereIsEquality()

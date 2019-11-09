@@ -4,28 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SelectPlayerItem">
+    tools:context=".ScoreItem">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <CheckBox
-            android:id="@+id/player_cb"
+        <Button
+            android:id="@+id/button_plus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.25"
+            android:text="+"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/score_text"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginTop="8dp"
+            android:gravity="left"
+            android:text="0"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toStartOf="@+id/button_plus"
+            app:layout_constraintStart_toEndOf="@+id/button_moins"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_moins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/player_tv"
-            android:layout_width="wrap_content"
+            android:id="@+id/name_text"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="left"
             android:text="TextView"
-            android:textSize="24sp"
+            android:textSize="25sp"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -35,10 +55,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.75">
+            app:layout_constraintGuide_percent="0.60">
 
         </androidx.constraintlayout.widget.Guideline>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

@@ -114,12 +114,15 @@ public class SelectPlayerFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+
+
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
+
     }
 
 

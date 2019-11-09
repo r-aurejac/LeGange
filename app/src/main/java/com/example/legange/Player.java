@@ -9,7 +9,7 @@ import java.util.Random;
 public class Player implements Serializable, Comparable {
 
     private String role;
-
+    private int bj_score = 0;
 
     public String getRole() {
         return role;
