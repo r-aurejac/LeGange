@@ -1,4 +1,4 @@
-package com.example.legange;
+package com.example.legange.UI;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,6 +11,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.legange.Class.Player;
+import com.example.legange.R;
+import com.example.legange.RuleInterface;
 
 import java.util.ArrayList;
 
@@ -62,7 +66,7 @@ public class SelectPlayerFragment extends Fragment {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.onScoreEnd();
+                mListener.toNextRule();
             }
         });
         selectPlayerItems = new ArrayList<SelectPlayerItem>();
@@ -100,7 +104,7 @@ public class SelectPlayerFragment extends Fragment {
             if(selectPlayerItem.playerCb.isChecked())
            Player.findPlayerByName(players,selectPlayerItem.player.getName()).incrementScore(points);
         }
-        mListener.onPointsAttributionEnd();
+        mListener.toScore();
 
     }
 

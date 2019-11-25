@@ -1,7 +1,6 @@
-package com.example.legange;
+package com.example.legange.UI;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
@@ -11,6 +10,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.legange.Class.Player;
+import com.example.legange.R;
+import com.example.legange.RuleInterface;
 
 import java.util.ArrayList;
 
@@ -142,7 +145,7 @@ public class PirateFragment extends Fragment {
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.onPirateRuleEnd();
+                mListener.toNextRule();
             }
         });
         linearLayout.addView(tv);
@@ -158,7 +161,7 @@ public class PirateFragment extends Fragment {
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.onPirateRuleEnd();
+                mListener.toNextRule();
             }
         });
         linearLayout.addView(tv);

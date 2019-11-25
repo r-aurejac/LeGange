@@ -1,15 +1,22 @@
-package com.example.legange;
+package com.example.legange.Class;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Random;
 
 public class Player implements Serializable, Comparable {
 
     private String role;
-    private int bj_score = 0;
+
+    public int getRule_score() {
+        return rule_score;
+    }
+
+    public void setRule_score(int rule_score) {
+        this.rule_score = rule_score;
+    }
+
+    private int rule_score = 0;
 
     public String getRole() {
         return role;

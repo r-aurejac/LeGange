@@ -1,4 +1,4 @@
-package com.example.legange;
+package com.example.legange.Class;
 
 import java.io.Serializable;
 import java.util.ArrayList;

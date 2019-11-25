@@ -1,8 +1,9 @@
-package com.example.legange;
+package com.example.legange.GameData;
+
+import com.example.legange.Class.Player;
+import com.example.legange.Class.Rule;
 
 import java.util.ArrayList;
-import java.util.Collections;
-
 
 
 public class AnnouncementData {

@@ -1,7 +1,6 @@
-package com.example.legange;
+package com.example.legange.UI;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.legange.Class.Player;
+import com.example.legange.R;
+import com.example.legange.RuleInterface;
 
 
 /**
@@ -89,7 +92,7 @@ public class ScoreModifItem extends  Fragment {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.onScoreEnd();
+                mListener.toNextRule();
             }
         });
         return view;

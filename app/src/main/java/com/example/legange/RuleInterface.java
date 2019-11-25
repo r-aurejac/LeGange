@@ -2,10 +2,9 @@ package com.example.legange;
 
 public interface RuleInterface {
     void onRuleEnd();
-    void onScoreEnd();
-    void onPointsAttributionEnd();
-    void onPirateRuleEnd();
-    void onWriitingRuleEnd();
-    void onBlackJackEnd();
+    void toScore();
+    void toNextRule();
+    void toPlayerSelection();
+
 
 }

@@ -1,4 +1,4 @@
-package com.example.legange;
+package com.example.legange.UI;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.legange.Class.Player;
+import com.example.legange.R;
+import com.example.legange.RuleInterface;
 
 
 public class SelectPlayerItem extends Fragment {

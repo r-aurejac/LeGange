@@ -1,4 +1,4 @@
-package com.example.legange;
+package com.example.legange.UI;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,32 +6,36 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.example.legange.Class.Player;
+import com.example.legange.R;
+import com.example.legange.RuleInterface;
 
 
-public class RuleFragment extends Fragment {
+public class ScoreItem extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String RULE = "param1";
-    private static final String PLAYERS = "param2";
 
+    private static final String PLAYER = "param1";
+    private LinearLayout linearLayout;
     // TODO: Rename and change types of parameters
-    private Rule rule;
-    private ArrayList<Player> players;
-    private TextView ruleText,titleText;
+
+    private Player player;
+
     private RuleInterface mListener;
 
-    public RuleFragment() {
+    private TextView nameText;
+    private TextView scoreText;
+    public ScoreItem() {
         // Required empty public constructor
     }
 
-    public static RuleFragment newInstance(Rule rule, ArrayList<Player> players) {
-        RuleFragment fragment = new RuleFragment();
+    public static ScoreItem newInstance(Player player) {
+        ScoreItem fragment = new ScoreItem();
         Bundle args = new Bundle();
-        args.putSerializable(RULE, rule);
-        args.putSerializable(PLAYERS, players);
+        args.putSerializable(PLAYER, player);
         fragment.setArguments(args);
         return fragment;
     }
@@ -40,9 +44,9 @@ public class RuleFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            rule = (Rule) getArguments().getSerializable(RULE);
-            players = (ArrayList<Player>) getArguments().getSerializable(PLAYERS);
+            player = (Player) getArguments().getSerializable(PLAYER);
         }
+
 
     }
 
@@ -52,26 +56,36 @@ public class RuleFragment extends Fragment {
 
 
 
-       View view = inflater.inflate(R.layout.fragment_rule, container, false);
+        View view = inflater.inflate(R.layout.item_score, container, false);
+
+        scoreText = (TextView) view.findViewById(R.id.score_text);
+        nameText = (TextView) view.findViewById(R.id.name_text);
+        if (player != null) {
+            printScore();
+        }
+        else printHeader();
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.onRuleEnd();
+                mListener.toNextRule();
             }
         });
-        ruleText = (TextView) view.findViewById(R.id.rule_text_view);
-        ruleText.setText(rule.getDescription());
-        ruleText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mListener.onRuleEnd();
-            }
-        });
-        titleText =(TextView) view.findViewById(R.id.title_text_view);
-        titleText.setText(rule.getName());
         return view;
     }
 
+    private void printHeader()
+    {
+
+        scoreText.setText("Score");
+        nameText.setText("Nom");
+    }
+
+    private void printScore()
+    {
+
+        scoreText.setText(String.valueOf(player.getScore()));
+        nameText.setText(player.getName());
+    }
 
 
     @Override
@@ -93,3 +107,5 @@ public class RuleFragment extends Fragment {
 
 
 }
+
+

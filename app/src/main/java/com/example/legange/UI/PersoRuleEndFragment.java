@@ -1,4 +1,4 @@
-package com.example.legange;
+package com.example.legange.UI;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,6 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+
+import com.example.legange.Class.Player;
+import com.example.legange.R;
+import com.example.legange.RuleInterface;
 
 
 public class PersoRuleEndFragment extends Fragment  {
@@ -58,7 +62,7 @@ public class PersoRuleEndFragment extends Fragment  {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.onScoreEnd();
+                mListener.toNextRule();
             }
         });
 
@@ -81,12 +85,12 @@ public class PersoRuleEndFragment extends Fragment  {
         if(points>0)
         player.incrementScore(points);
 
-        mListener.onPointsAttributionEnd();
+        mListener.toScore();
    }
     private void onNonClicked() {
         if(points<0)
             player.incrementScore(points);
-        mListener.onPointsAttributionEnd();
+        mListener.toScore();
     }
 
 

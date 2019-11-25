@@ -1,4 +1,4 @@
-package com.example.legange;
+package com.example.legange.UI;
 
 import android.content.Context;
 import android.net.Uri;
@@ -13,6 +13,11 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.example.legange.Class.Player;
+import com.example.legange.R;
+import com.example.legange.Class.Rule;
+import com.example.legange.RuleInterface;
 
 import java.util.ArrayList;
 
@@ -90,7 +95,7 @@ public class WriteFragment extends Fragment {
             if (texts.size() == players.size()-1)
                 read();
         }
-        else mListener.onWriitingRuleEnd();
+        else mListener.toPlayerSelection();
     }
     private void read()
     {

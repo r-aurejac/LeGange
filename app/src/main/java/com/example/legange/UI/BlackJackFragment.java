@@ -1,4 +1,4 @@
-package com.example.legange;
+package com.example.legange.UI;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,6 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.legange.Class.Player;
+import com.example.legange.R;
+import com.example.legange.RuleInterface;
 
 import java.util.ArrayList;
 
@@ -87,6 +91,7 @@ public class BlackJackFragment extends Fragment {
     {
         int rand = 1 + (int)(Math.random() * ((13 - 1) + 1));
         score = score + rand;
+        players.get(playerIndex).setRule_score(score);
         totalText.setText(String.valueOf(score));
         valueText.setText(String.valueOf(rand));
     }
@@ -100,7 +105,22 @@ public class BlackJackFragment extends Fragment {
             totalText.setText(String.valueOf(0));
             valueText.setText(String.valueOf(0));
         }
-        else mListener.onBlackJackEnd();
+        else end();
+    }
+
+    private void end()
+    {
+        for(Player player : players) {
+            if (player.getRule_score()==21)
+                player.incrementScore(4);
+            else if (player.getRule_score()==20)
+                player.incrementScore(2);
+            else if (player.getRule_score()==19)
+                player.incrementScore(1);
+            else if (player.getRule_score()>21)
+                player.incrementScore(-1);
+        }
+        mListener.toPlayerSelection();
     }
 
     @Override

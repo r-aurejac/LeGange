@@ -1,4 +1,4 @@
-package com.example.legange;
+package com.example.legange.UI;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,23 +6,24 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
+
+import com.example.legange.GameData.AnnouncementData;
+import com.example.legange.Class.Player;
+import com.example.legange.R;
+import com.example.legange.GameData.RoleData;
+import com.example.legange.Class.Rule;
+import com.example.legange.GameData.RuleData;
+import com.example.legange.RuleInterface;
+import com.example.legange.str;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class GameActivity extends AppCompatActivity implements RuleInterface {
 
-    private static final int UNKNOWN = 0;
-    private static final int PIRATE = 1;
-    private static final int GROUP = 2;
-    private static final int PERSO = 3;
-    private static final int WRITE = 4;
-    private static final int SCORE = 5;
-    private  static  final int GIFT = 6;
-    private  static  final int BLACKJACK= 7;
+
 
     LinearLayout linearLayout;
     int roleIndex = 0;
@@ -30,8 +31,7 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
     int announcementIndex = 0;
 
     int ruleIndex = 0;
-    boolean pirateRuleIsDone = false;
-    boolean enfantRuleIsDone = false;
+
     boolean gameEnding = false;
 
     Rule ruleCache;
@@ -66,51 +66,43 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
 
     @Override
     public void onRuleEnd() {
-            if( (ruleCache.getNextScreen() == GROUP))
+            if( (ruleCache.getNextScreen() == str.GROUP))
                 showPlayerSelection();
-            else if(ruleCache.getNextScreen() == PERSO)
+            else if(ruleCache.getNextScreen() == str.PERSO)
                 showPersoRuleEnd();
-            else if(ruleCache.getNextScreen() == UNKNOWN)
+            else if(ruleCache.getNextScreen() == str.UNKNOWN)
                 nextRule();
-            else if(ruleCache.getNextScreen() == SCORE)
+            else if(ruleCache.getNextScreen() == str.SCORE)
                 showScore();
-            else if(ruleCache.getNextScreen() == WRITE)
+            else if(ruleCache.getNextScreen() == str.WRITE)
                 showWritingRule(ruleCache);
-            else if(ruleCache.getNextScreen() == BLACKJACK)
+            else if(ruleCache.getNextScreen() == str.BLACKJACK)
                 showBlackJack(ruleCache);
-            else if(ruleCache.getNextScreen() == GIFT)
+            else if(ruleCache.getNextScreen() == str.GIFT)
                openGift();
-            else if(ruleCache.getNextScreen() == PIRATE)
+            else if(ruleCache.getNextScreen() == str.PIRATE)
                 showPirateRule();
 
 
 
     }
 
-    @Override
-    public void onScoreEnd() {
 
-        nextRule();
-    }
     @Override
-    public void onPointsAttributionEnd() {
+    public void toScore() {
         showScore();
     }
 
     @Override
-    public void onPirateRuleEnd() {
+    public void toNextRule() {
         nextRule();
     }
 
     @Override
-    public void onWriitingRuleEnd() {
+    public void toPlayerSelection() {
         showPlayerSelection();
     }
 
-    @Override
-    public void onBlackJackEnd() {
-        showPlayerSelection();
-    }
 
     private void organizeRules()
     {
@@ -208,17 +200,14 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.game_linear_layout, ScoreFragment.newInstance(players));
         fragmentTransaction.commit();
-
     }
 
     private void showPirateRule()
     {
-                FragmentManager fragmentManager = this.getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.game_linear_layout, PirateFragment.newInstance(players,"test"));
-                fragmentTransaction.commit();
-                pirateRuleIsDone = true;
-
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.game_linear_layout, PirateFragment.newInstance(players,"test"));
+        fragmentTransaction.commit();
     }
 
 
@@ -228,8 +217,6 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.game_linear_layout, PersoRuleEndFragment.newInstance(ruleCache.getRulePlayers().get(0),(ruleCache.getPoints())));
         fragmentTransaction.commit();
-
-
     }
     private void showPlayerSelection()
     {
@@ -237,7 +224,6 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.game_linear_layout, SelectPlayerFragment.newInstance(players,ruleCache.getPoints()));
         fragmentTransaction.commit();
-
     }
 
 
