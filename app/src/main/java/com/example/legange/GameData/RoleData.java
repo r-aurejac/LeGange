@@ -98,13 +98,13 @@ public class RoleData {
         return Rules;
     }
 
-    public ArrayList<Rule> getChevalRules()
+    public ArrayList<Rule> getChevalRules(Player player)
     {
         ArrayList<Rule> Rules = new ArrayList<Rule>();
 
         Rules.add(new Rule("dopage",
                 "Si le cheval le moins coté est dernier il gagne 4 points, si non il boit 2 gorgées",
-                4,str.PERSO));
+                4,str.PERSO,player));
 
         Rules.add(new Rule("paris truqués",
                 "Si le cheval le moins coté est premier tous les autres perdent 1 point, si non il boit 2 gorgées",
@@ -114,7 +114,7 @@ public class RoleData {
         return Rules;
     }
 
-    public ArrayList<Rule> getVictimeRules()
+    public ArrayList<Rule> getVictimeRules(Player player)
     {
         ArrayList<Rule> Rules = new ArrayList<Rule>();
 
@@ -124,22 +124,22 @@ public class RoleData {
 
         Rules.add(new Rule("plus grosse victime tu meurs",
                 "Si la victime a bu à la règle précèdente elle gagne 4 points, Si non elle boit le nombre de gorgées max bu à la règle precédente par un joueur",
-                4,str.PERSO));
+                4,str.PERSO, player));
 
 
         return Rules;
     }
-    public ArrayList<Rule> getGuerrierRules()
+    public ArrayList<Rule> getGuerrierRules(Player player)
     {
         ArrayList<Rule> Rules = new ArrayList<Rule>();
 
         Rules.add(new Rule("un vrai guerrier",
                 "Le guerrier Indien boit une gorgée du gange ou perd 2 points",
-                -2, str.PERSO));
+                -2, str.PERSO,player));
 
         Rules.add(new Rule("Le vrai roi du gange",
                 "Le guerrier indien boit 1 gorgée de 3 alcool differents pour gagner 2 point ",
-                2,str.PERSO));
+                2,str.PERSO,player));
 
 
         return Rules;
@@ -148,6 +148,8 @@ public class RoleData {
 
     public ArrayList<Rule> getRoleRules(ArrayList<Player> players)
     {
+
+        Player p;
      ArrayList<Rule> roleRules = new ArrayList<Rule>();
         if(Player.findPlayerByRole(players,"pirate")!=null)
             roleRules.addAll(getPirateRules());
@@ -155,14 +157,17 @@ public class RoleData {
         if(Player.findPlayerByRole(players,"enfant")!=null)
             roleRules.addAll(getEnfantRules());
 
-        if(Player.findPlayerByRole(players,"cheval le moins coté")!=null)
-            roleRules.addAll(getChevalRules());
+        p = Player.findPlayerByRole(players,"cheval le moins coté");
+        if(p!=null)
+            roleRules.addAll(getChevalRules(p));
 
-        if(Player.findPlayerByRole(players,"victime")!=null)
-            roleRules.addAll(getVictimeRules());
+        p = Player.findPlayerByRole(players,"victime");
+        if(p!=null)
+            roleRules.addAll(getVictimeRules(p));
 
-        if(Player.findPlayerByRole(players,"guerrier indien")!=null)
-            roleRules.addAll(getGuerrierRules());
+        p = Player.findPlayerByRole(players,"guerrier indien");
+        if(p!=null)
+            roleRules.addAll(getGuerrierRules(p));
 
         for(Rule rule : roleRules)
         {

@@ -58,5 +58,14 @@ public class Rule implements Serializable {
         this.nextScreen = nextScreen;
         rulePlayers = new ArrayList<>();
     }
+    public Rule(String name, String description,int points, int nextScreen,Player player)
+    {
+        this.name = name;
+        this.description = description;
+        this.points = points;
+        this.nextScreen = nextScreen;
+        rulePlayers = new ArrayList<>();
+        rulePlayers.add(player);
+    }
 
 }

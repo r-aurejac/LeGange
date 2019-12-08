@@ -2,21 +2,14 @@ package com.example.legange.GameData;
 
 import com.example.legange.Class.Player;
 import com.example.legange.Class.Rule;
-
+import com.example.legange.str;
 import java.util.ArrayList;
 
 
 public class AnnouncementData {
-    private static final int ANNOUNCEMENT = 0;
-    private static final int ROLE = 1;
-    private static final int GROUP = 2;
-    private static final int PERSO = 3;
-    private static final int WRITE = 4;
-    private static final int END_ANNOUNCEMENT = 5;
-    private  static  final int GIFT = 6;
-    private  static  final int BLACKJACK= 7;
 
-    public ArrayList<Rule> roles, announcements,endAnnouncements,persoRules, groupRules,gifts;
+
+    public ArrayList<Rule>  announcements,endAnnouncements;
     public AnnouncementData()
     {
         announcements = new ArrayList<>();
@@ -36,10 +29,10 @@ public class AnnouncementData {
         announcements.add(new Rule("introduction",
                 "Bienvenue dans le Gange, chaque joueur va se voir attribuer un rôle puis va débuter une série de règles permettant de gagner ou de perdre des points." +
                         "à la fin de la partie le joueur avec le moins de points sera purifié par le Gange",
-                0,ANNOUNCEMENT));
+                0,str.ANNOUNCEMENT));
         announcements.add(new Rule("Cérémonie du Gange",
                 "Chaque joueur verse la quantité qu'il désire de son verre dans le Gange. Si un ou des toxiques ont été désignés il peuvent verser autre chose que leur verre",0
-                ,ANNOUNCEMENT));
+                ,str.ANNOUNCEMENT));
     }
 
     public Rule getAnnouncement(int index)
@@ -52,10 +45,10 @@ public class AnnouncementData {
     private void setEndAnnouncement() {
         endAnnouncements.add(new Rule("Purification par le Gange",
                 "player est l'élu,il a le score le plus faible, il doit être purifié par le Gange",0,
-                END_ANNOUNCEMENT));
+                str.END_ANNOUNCEMENT));
         endAnnouncements.add(new Rule("Enrichissement par le gange",
                 "player est l'élu, il a le score le plus faible, mais étant le guerrier Indien il peut enrichir le joueur player2 de sa culture en partageant sa purification avec lui",
-                0,END_ANNOUNCEMENT));
+                0,str.END_ANNOUNCEMENT));
     }
 
 

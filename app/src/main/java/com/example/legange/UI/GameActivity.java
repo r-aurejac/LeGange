@@ -82,8 +82,10 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
                openGift();
             else if(ruleCache.getNextScreen() == str.PIRATE)
                 showPirateRule();
-
-
+            else if(ruleCache.getNextScreen() == str.ANNOUNCEMENT)
+                nextRule();
+            else if(ruleCache.getNextScreen() == str.END_ANNOUNCEMENT)
+                nextRule();
 
     }
 
@@ -215,7 +217,7 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
     {
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.game_linear_layout, PersoRuleEndFragment.newInstance(ruleCache.getRulePlayers().get(0),(ruleCache.getPoints())));
+        fragmentTransaction.replace(R.id.game_linear_layout, PersoRuleEndFragment.newInstance(ruleCache.getRulePlayers().get(0),(ruleCache.getPoints()))); //A BESOIN DE FIX
         fragmentTransaction.commit();
     }
     private void showPlayerSelection()
