@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.legange.Class.Player;
 import com.example.legange.R;
 import com.example.legange.RuleInterface;
+import com.example.legange.str;
 
 import java.util.ArrayList;
 
@@ -77,11 +78,11 @@ public class PirateFragment extends Fragment {
         linearLayout = view.findViewById(R.id.linear_layout);
         attackers = new ArrayList<Player>();
         for(int i = 0; i<players.size();i++) {
-            if (!players.get(i).getRole().equals("pirate"))
+            if (!players.get(i).getRole().equals(str.RADIN))
                 attackers.add(players.get(i));
 
         }
-        pirate = Player.findPlayerByRole(players,"pirate");
+        pirate = Player.findPlayerByRole(players,str.RADIN);
         initViews(view);
 
 

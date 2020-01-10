@@ -19,6 +19,7 @@ import com.example.legange.RuleInterface;
 import com.example.legange.str;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 
 public class GameActivity extends AppCompatActivity implements RuleInterface {
@@ -74,8 +75,10 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
                 nextRule();
             else if(ruleCache.getNextScreen() == str.SCORE)
                 showScore();
+            else if(ruleCache.getNextScreen() == str.WRITE_NEW_RULE)
+                showWritingRule(1);
             else if(ruleCache.getNextScreen() == str.WRITE)
-                showWritingRule(ruleCache);
+                showWritingRule(players.size());
             else if(ruleCache.getNextScreen() == str.BLACKJACK)
                 showBlackJack(ruleCache);
             else if(ruleCache.getNextScreen() == str.GIFT)
@@ -105,16 +108,22 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
         showPlayerSelection();
     }
 
+    @Override
+    public void OnChefRuleEnd(String rule) {
+        Rule chefRule = new Rule("Règle du Chef",rule,0,str.UNKNOWN);
+        rules.add(chefRule);
+        nextRule();
+    }
+
 
     private void organizeRules()
     {
         RoleData roleData = new RoleData();
 
         int k =0;
-        roles = new ArrayList<>();
+        roles = roleData.getRoles(players);
         rules = new ArrayList<>();
         for(int i = 0; i<players.size();i++) {
-            roles.add(roleData.getRole(players.get(i), i));
             rules.add(ruleData.getPersoRule(players.get(i), i));
             k++;
         }
@@ -180,11 +189,13 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
         fragmentTransaction.replace(R.id.game_linear_layout, RuleFragment.newInstance(rule, players));
         fragmentTransaction.commit();
     }
-    private void showWritingRule(Rule rule)
+    private void showWritingRule(int phases)
     {
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.game_linear_layout, WriteFragment.newInstance(rule, players));
+        fragmentTransaction.replace(R.id.game_linear_layout, WriteFragment.newInstance(ruleCache, players,phases));
+
+
         fragmentTransaction.commit();
     }
     private void showBlackJack(Rule rule)
@@ -206,9 +217,11 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
 
     private void showPirateRule()
     {
+        ruleCache.setNextScreen(str.SCORE);
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.game_linear_layout, PirateFragment.newInstance(players,"test"));
+
         fragmentTransaction.commit();
     }
 
@@ -238,7 +251,7 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
         //if(thereIsEquality())
         AnnouncementData ad = new AnnouncementData();
 
-        if(players.get(0).getRole().equals("guerrier indien"))
+        if(players.get(0).getRole().equals(str.HINDOU))
         {
             ruleCache= ad.getEndAnnouncement(1,players.get(0), players.get(1));
             showRule(ruleCache);

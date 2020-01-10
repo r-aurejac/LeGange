@@ -20,21 +20,15 @@ import com.example.legange.Class.Rule;
 import com.example.legange.RuleInterface;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link WriteFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link WriteFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class WriteFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM3 = "param3";
     private boolean isWritingPhase = true;
     // TODO: Rename and change types of parameters
     private ArrayList players;
@@ -44,17 +38,19 @@ public class WriteFragment extends Fragment {
     private Button validerButton;
     private EditText editText;
     private FrameLayout frameLayout;
+    int phases =0;
 
     public WriteFragment() {
         // Required empty public constructor
     }
 
 
-    public static WriteFragment newInstance( Rule rule,ArrayList<Player> players) {
+    public static WriteFragment newInstance( Rule rule,ArrayList<Player> players, int phases) {
         WriteFragment fragment = new WriteFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_PARAM1, players);
         args.putSerializable(ARG_PARAM2, rule);
+        args.putInt(ARG_PARAM3, phases);
         fragment.setArguments(args);
         return fragment;
     }
@@ -65,6 +61,7 @@ public class WriteFragment extends Fragment {
         if (getArguments() != null) {
             players = (ArrayList<Player>) getArguments().getSerializable(ARG_PARAM1);
             rule = (Rule) getArguments().getSerializable(ARG_PARAM2);
+            phases = getArguments().getInt(ARG_PARAM3);
         }
     }
 
@@ -85,15 +82,21 @@ public class WriteFragment extends Fragment {
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+
 
     private void validation()
     {
         if(isWritingPhase) {
             texts.add(editText.getText().toString());
             editText.setText("");
-            if (texts.size() == players.size()-1)
+            if (texts.size() == players.size()-1) {
                 read();
+                Collections.shuffle(texts);
+            }
+            else if (phases == 1)
+            {
+                mListener.OnChefRuleEnd(texts.get(0));
+            }
         }
         else mListener.toPlayerSelection();
     }

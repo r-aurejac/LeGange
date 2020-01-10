@@ -27,12 +27,12 @@ public class AnnouncementData {
     private void setAnnouncement()
     {
         announcements.add(new Rule("introduction",
-                "Bienvenue dans le Gange, chaque joueur va se voir attribuer un rôle puis va débuter une série de règles permettant de gagner ou de perdre des points." +
-                        "à la fin de la partie le joueur avec le moins de points sera purifié par le Gange",
-                0,str.ANNOUNCEMENT));
+                "Bienvenu au Gange, le Fleuve le plus Sacré du Monde, avant de débuter cette folle aventure chaque joueur va se voir attribuer un role, une série de règle va suivre permettant de gagner ou perdre des points." +
+                        " Le joueur avec le moins de points aura le privilège de boire la Sainte eau du Gange ",
+                0, str.ANNOUNCEMENT));
         announcements.add(new Rule("Cérémonie du Gange",
-                "Chaque joueur verse la quantité qu'il désire de son verre dans le Gange. Si un ou des toxiques ont été désignés il peuvent verser autre chose que leur verre",0
-                ,str.ANNOUNCEMENT));
+                "Chaque joueur verse la quantité qu'il désire de son verre dans le Gange. L'Hindou du groupe peut ajouter ce qu'il désire",0
+                , str.ANNOUNCEMENT));
     }
 
     public Rule getAnnouncement(int index)
@@ -44,11 +44,11 @@ public class AnnouncementData {
 
     private void setEndAnnouncement() {
         endAnnouncements.add(new Rule("Purification par le Gange",
-                "player est l'élu,il a le score le plus faible, il doit être purifié par le Gange",0,
+                "player a été désigné par les dieux Hindous, il remporte la Sainte Eau du Gange",0,
                 str.END_ANNOUNCEMENT));
         endAnnouncements.add(new Rule("Enrichissement par le gange",
-                "player est l'élu, il a le score le plus faible, mais étant le guerrier Indien il peut enrichir le joueur player2 de sa culture en partageant sa purification avec lui",
-                0,str.END_ANNOUNCEMENT));
+                "player est l'élu, il a le score le plus faible, mais étant très généreux il peut partager son brevage avec player2",
+                0, str.END_ANNOUNCEMENT));
     }
 
 

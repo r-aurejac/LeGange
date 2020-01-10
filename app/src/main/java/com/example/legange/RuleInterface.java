@@ -5,6 +5,6 @@ public interface RuleInterface {
     void toScore();
     void toNextRule();
     void toPlayerSelection();
-
+    void OnChefRuleEnd(String rule);
 
 }

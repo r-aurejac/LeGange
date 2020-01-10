@@ -7,11 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.legange.Class.Player;
 import com.example.legange.R;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button jouerButton;
+    private Button jouerButton,creditButton,testButton;
 
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -30,6 +33,29 @@ public class MainActivity extends AppCompatActivity {
                 getApplicationContext().startActivity(intent);
             }
         });
+
+        creditButton = (Button) findViewById(R.id.button_credit);
+        creditButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = AddPlayerActivity.newIntent(getApplicationContext());
+                getApplicationContext().startActivity(intent);
+            }
+        });
+
+        testButton = (Button) findViewById(R.id.button_test);
+        testButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ArrayList<Player> players = new ArrayList<>();
+                for(int i =0; i<8; i++)
+                {
+                    String name = "Player" + String.valueOf(i+1);
+                    players.add(new Player(name));
+                }
+                Intent intent = GameActivity.newIntent(getApplicationContext(), players);
+                getApplicationContext().startActivity(intent);
+            }
+        });
+
 
     }
 }

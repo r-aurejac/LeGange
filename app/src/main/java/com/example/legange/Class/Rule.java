@@ -18,6 +18,8 @@ public class Rule implements Serializable {
         this.points = points;
     }
 
+    public void setNextScreen(int nextscreen) {this.nextScreen = nextscreen;}
+
     private String name;
 
     public ArrayList<Player> getRulePlayers() {
