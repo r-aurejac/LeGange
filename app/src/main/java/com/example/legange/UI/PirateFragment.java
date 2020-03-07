@@ -29,7 +29,7 @@ public class PirateFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private ArrayList<Player> players;
     private ArrayList<Player> attackers;
-    private String mParam2;
+
     private  TextView tvs[];
     private Player pirate;
     private RuleInterface mListener;
@@ -48,15 +48,15 @@ public class PirateFragment extends Fragment {
      * this fragment using the provided parameters.
      *
      * @param players Parameter 1.
-     * @param param2 Parameter 2.
+
      * @return A new instance of fragment PirateFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static PirateFragment newInstance(ArrayList<Player> players, String param2) {
+    public static PirateFragment newInstance(ArrayList<Player> players) {
         PirateFragment fragment = new PirateFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_PARAM1, players);
-        args.putString(ARG_PARAM2, param2);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -66,7 +66,7 @@ public class PirateFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             players = (ArrayList<Player>) getArguments().getSerializable(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -78,11 +78,11 @@ public class PirateFragment extends Fragment {
         linearLayout = view.findViewById(R.id.linear_layout);
         attackers = new ArrayList<Player>();
         for(int i = 0; i<players.size();i++) {
-            if (!players.get(i).getRole().equals(str.RADIN))
+            if (!players.get(i).getRole().equals(str.VOLEUR))
                 attackers.add(players.get(i));
 
         }
-        pirate = Player.findPlayerByRole(players,str.RADIN);
+        pirate = Player.findPlayerByRole(players,str.VOLEUR);
         initViews(view);
 
 

@@ -3,6 +3,7 @@ package com.example.legange.UI;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,22 +22,23 @@ public class RuleFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String RULE = "param1";
     private static final String PLAYERS = "param2";
-
+    private static final String INDICE = "param3";
     // TODO: Rename and change types of parameters
     private Rule rule;
     private ArrayList<Player> players;
     private TextView ruleText,titleText;
     private RuleInterface mListener;
-
+    private int indice = 0;
     public RuleFragment() {
         // Required empty public constructor
     }
 
-    public static RuleFragment newInstance(Rule rule, ArrayList<Player> players) {
+    public static RuleFragment newInstance(Rule rule, ArrayList<Player> players,int indice) {
         RuleFragment fragment = new RuleFragment();
         Bundle args = new Bundle();
         args.putSerializable(RULE, rule);
         args.putSerializable(PLAYERS, players);
+        args.putInt(INDICE,indice);
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,6 +49,7 @@ public class RuleFragment extends Fragment {
         if (getArguments() != null) {
             rule = (Rule) getArguments().getSerializable(RULE);
             players = (ArrayList<Player>) getArguments().getSerializable(PLAYERS);
+            indice = getArguments().getInt(INDICE);
         }
 
     }
@@ -65,7 +68,7 @@ public class RuleFragment extends Fragment {
             }
         });
         ruleText = (TextView) view.findViewById(R.id.rule_text_view);
-        ruleText.setText(rule.getDescription());
+        ruleText.setText(rule.texts.get(indice));
         ruleText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

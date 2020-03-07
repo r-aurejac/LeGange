@@ -27,19 +27,16 @@ public class AnnouncementData {
     private void setAnnouncement()
     {
         announcements.add(new Rule("introduction",
-                "Bienvenu au Gange, le Fleuve le plus Sacré du Monde, avant de débuter cette folle aventure chaque joueur va se voir attribuer un role, une série de règle va suivre permettant de gagner ou perdre des points." +
-                        " Le joueur avec le moins de points aura le privilège de boire la Sainte eau du Gange ",
+                "Bienvenue au tournois du Gange, tous les joueurs ici présents vont s'affronter pour tenter de gagner le droit de boire l'eau du fleuve le plus sacré du monde",
                 0, str.ANNOUNCEMENT));
         announcements.add(new Rule("Cérémonie du Gange",
                 "Chaque joueur verse la quantité qu'il désire de son verre dans le Gange. L'Hindou du groupe peut ajouter ce qu'il désire",0
                 , str.ANNOUNCEMENT));
     }
 
-    public Rule getAnnouncement(int index)
+    public ArrayList<Rule> getAnnouncement()
     {
-
-        Rule announcement = announcements.get(index);
-        return announcement;
+        return announcements;
     }
 
     private void setEndAnnouncement() {
@@ -56,8 +53,8 @@ public class AnnouncementData {
     {
         Rule rule = endAnnouncements.get(index);
         rule.getRulePlayers().add(player);
-        String string = rule.getDescription().replace("player",player.getName());
-        rule.setDescription(string);
+        String string = rule.texts.get(rule.getIndice()).replace("player",player.getName());
+        rule.texts.set(rule.getIndice(),string);
         return rule;
     }
     public Rule getEndAnnouncement(int index, Player player,Player player2)
@@ -65,9 +62,9 @@ public class AnnouncementData {
         Rule rule = endAnnouncements.get(index);
         rule.getRulePlayers().add(player);
         rule.getRulePlayers().add(player2);
-        String string = rule.getDescription().replace("player2",player2.getName());
+        String string = rule.texts.get(rule.getIndice()).replace("player2",player2.getName());
         string = string.replace("player",player.getName());
-        rule.setDescription(string);
+        rule.texts.set(rule.getIndice(),string);
         return rule;
     }
 

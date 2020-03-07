@@ -18,7 +18,7 @@ public class str {
 
     // NUMERIC
 
-    public static final int PLAYER_NUMBER = 8;
+    public static final int MAX_PLAYER_NUMBER = 8;
 
 
     // ROLE
@@ -27,9 +27,9 @@ public class str {
     public static final String CHANCEUX = "Chanceux";
     public static final String  VICTIME = "Victime";
     public static final String PRECOCE = "Précoce";
-    public static final String HINDOU = "Hindou";
-    public  static  final String GENEREUX = "Généreux";
-    public  static  final String RADIN = "Juif";
+    public static final String CREME = "Creme";
+    public  static  final String ATTARDE = "Généreux";
+    public  static  final String VOLEUR = "Juif";
 
 
 

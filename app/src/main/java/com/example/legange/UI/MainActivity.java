@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.example.legange.Class.Player;
 import com.example.legange.R;
+import com.example.legange.str;
 
 import java.util.ArrayList;
 
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         jouerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                Intent intent = AddPlayerActivity.newIntent(getApplicationContext());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getApplicationContext().startActivity(intent);
             }
         });
@@ -46,12 +48,13 @@ public class MainActivity extends AppCompatActivity {
         testButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ArrayList<Player> players = new ArrayList<>();
-                for(int i =0; i<8; i++)
+                for(int i =0; i< str.MAX_PLAYER_NUMBER; i++)
                 {
-                    String name = "Player" + String.valueOf(i+1);
+                    String name = "Joueur" + String.valueOf(i+1);
                     players.add(new Player(name));
                 }
                 Intent intent = GameActivity.newIntent(getApplicationContext(), players);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getApplicationContext().startActivity(intent);
             }
         });

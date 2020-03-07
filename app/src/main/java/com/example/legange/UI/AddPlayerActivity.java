@@ -71,6 +71,7 @@ public class AddPlayerActivity extends AppCompatActivity {
     {
         if (joueurs.size()>2) {
             Intent intent = GameActivity.newIntent(getApplicationContext(), joueurs);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             getApplicationContext().startActivity(intent);
         }
         else alertDialog("Il faut au moins 3 kheys pour jouer");

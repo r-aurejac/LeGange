@@ -90,8 +90,9 @@ public class WriteFragment extends Fragment {
             texts.add(editText.getText().toString());
             editText.setText("");
             if (texts.size() == players.size()-1) {
-                read();
                 Collections.shuffle(texts);
+                read();
+
             }
             else if (phases == 1)
             {
