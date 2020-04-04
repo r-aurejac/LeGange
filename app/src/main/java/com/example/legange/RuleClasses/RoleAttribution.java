@@ -1,18 +1,12 @@
-package com.example.legange.Class;
-
-import android.support.v4.app.FragmentManager;
-
-import java.util.ArrayList;
+package com.example.legange.RuleClasses;
 
 
-
-
-public class Role extends Rule {
+public class RoleAttribution extends Rule {
 
 
     public Player player;
 
-    public Role(String name, String description, int points, int nextScreen) {
+    public RoleAttribution(String name, String description, int points, int nextScreen) {
         super(name, description, points, nextScreen);
 
 

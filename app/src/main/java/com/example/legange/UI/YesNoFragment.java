@@ -9,12 +9,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.example.legange.Class.Player;
+import com.example.legange.RuleClasses.Player;
 import com.example.legange.R;
 import com.example.legange.RuleInterface;
 
 
-public class PersoRuleEndFragment extends Fragment  {
+public class YesNoFragment extends Fragment  {
 
 
     private static final String PLAYER = "param1";
@@ -27,12 +27,12 @@ public class PersoRuleEndFragment extends Fragment  {
 
     private RuleInterface mListener;
 
-    public PersoRuleEndFragment() {
+    public YesNoFragment() {
         // Required empty public constructor
     }
 
-    public static PersoRuleEndFragment newInstance(Player player, int points) {
-        PersoRuleEndFragment fragment = new PersoRuleEndFragment();
+    public static YesNoFragment newInstance(Player player, int points) {
+        YesNoFragment fragment = new YesNoFragment();
         Bundle args = new Bundle();
         args.putSerializable(PLAYER, player);
         args.putInt(POINTS,points);

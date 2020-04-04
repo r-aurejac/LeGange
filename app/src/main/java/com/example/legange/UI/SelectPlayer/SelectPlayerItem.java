@@ -1,4 +1,4 @@
-package com.example.legange.UI;
+package com.example.legange.UI.SelectPlayer;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.legange.Class.Player;
+import com.example.legange.RuleClasses.Player;
 import com.example.legange.R;
 import com.example.legange.RuleInterface;
 

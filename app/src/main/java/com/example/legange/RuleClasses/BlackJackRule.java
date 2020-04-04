@@ -1,4 +1,4 @@
-package com.example.legange.Class;
+package com.example.legange.RuleClasses;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;

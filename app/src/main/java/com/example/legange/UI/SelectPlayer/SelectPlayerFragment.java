@@ -1,4 +1,4 @@
-package com.example.legange.UI;
+package com.example.legange.UI.SelectPlayer;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,34 +10,36 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import com.example.legange.Class.Player;
+import com.example.legange.RuleClasses.Player;
 import com.example.legange.R;
 import com.example.legange.RuleInterface;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 
-public class ScoreFragment extends Fragment {
+public class SelectPlayerFragment extends Fragment {
 
 
     private static final String PLAYER = "param1";
+    private static final String POINTS = "param2";
     private LinearLayout linearLayout;
-    private Button buttonCorrection;
-
+    private int points;
+    private Button validerButton;
     private ArrayList<Player> players;
-
+    private  ArrayList<SelectPlayerItem> selectPlayerItems;
     private RuleInterface mListener;
-    Boolean correction = false;
-    public ScoreFragment() {
+    private TextView textView;
+    public SelectPlayerFragment() {
         // Required empty public constructor
     }
 
-    public static ScoreFragment newInstance(ArrayList<Player> players) {
-        ScoreFragment fragment = new ScoreFragment();
+    public static SelectPlayerFragment newInstance(ArrayList<Player> players, int points) {
+        SelectPlayerFragment fragment = new SelectPlayerFragment();
         Bundle args = new Bundle();
         args.putSerializable(PLAYER, players);
+        args.putInt(POINTS,points);
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,6 +49,7 @@ public class ScoreFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             players = (ArrayList<Player>) getArguments().getSerializable(PLAYER);
+            points = getArguments().getInt(POINTS);
         }
 
     }
@@ -57,16 +60,8 @@ public class ScoreFragment extends Fragment {
 
 
 
-        View view = inflater.inflate(R.layout.fragment_score, container, false);
-        buttonCorrection = view.findViewById(R.id.button_modif);
-        buttonCorrection.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(correction == false)
-                showCorrection();
-                else showScore();
-            }
-        });
+        View view = inflater.inflate(R.layout.fragment_select_player, container, false);
+
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,41 +69,45 @@ public class ScoreFragment extends Fragment {
                 mListener.toNextRule();
             }
         });
-
+        selectPlayerItems = new ArrayList<SelectPlayerItem>();
         showScore();
+        validerButton = (Button) view.findViewById(R.id.valider_button);
+        validerButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onValiderClicked();
+            }
+        });
+        textView = (TextView) view.findViewById(R.id.select_player_text);
+
+        if(points<0)
+            textView.setText("cocher le ou les perdants ");
+        else
+            textView.setText("cocher le ou les gagnants ");
         return view;
     }
 
     public void showScore() {
-        correction = false;
-        ArrayList<Player> sortedPlayers = new ArrayList<Player>();
-        sortedPlayers.addAll(players);
-        Collections.sort(sortedPlayers);
-        Collections.reverse(sortedPlayers);
         FragmentManager fragmentManager = this.getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.score_linear_layout, new ScoreItem());
-        for (int i = 0; i < sortedPlayers.size(); i++) {
-            fragmentTransaction.add(R.id.score_linear_layout, ScoreItem.newInstance(sortedPlayers.get(i)));
-
+        for (int i = 0; i < players.size(); i++) {
+            SelectPlayerItem selectPlayerItem = SelectPlayerItem.newInstance(players.get(i));
+            fragmentTransaction.add(R.id.players_linear_layout, selectPlayerItem);
+            selectPlayerItems.add(selectPlayerItem);
         }
         fragmentTransaction.commit();
     }
-    public void showCorrection() {
-        correction = true;
-        ArrayList<Player> sortedPlayers = new ArrayList<Player>();
-        sortedPlayers.addAll(players);
-        Collections.sort(sortedPlayers);
-        Collections.reverse(sortedPlayers);
-        FragmentManager fragmentManager = this.getChildFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.score_linear_layout, new ScoreItem());
-        for (int i = 0; i < sortedPlayers.size(); i++) {
-            fragmentTransaction.add(R.id.score_linear_layout, ScoreModifItem.newInstance(sortedPlayers.get(i)));
 
+    private void onValiderClicked()
+    {
+        for(SelectPlayerItem selectPlayerItem : selectPlayerItems) {
+
+            if(selectPlayerItem.playerCb.isChecked())
+           Player.findPlayerByName(players,selectPlayerItem.player.getName()).incrementScore(points);
         }
-        fragmentTransaction.commit();
+        mListener.toScore();
+
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -119,14 +118,21 @@ public class ScoreFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+
+
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
+
     }
 
 
+
+
+
 }
+
 

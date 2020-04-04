@@ -1,10 +1,9 @@
-package com.example.legange.Class;
+package com.example.legange.RuleClasses;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import com.example.legange.R;
-import com.example.legange.RuleInterface;
 import com.example.legange.UI.RuleFragment;
 
 import java.io.Serializable;

@@ -30,7 +30,7 @@ public class str {
     public static final String CREME = "Creme";
     public  static  final String ATTARDE = "Généreux";
     public  static  final String VOLEUR = "Juif";
-
+   
 
 
 }

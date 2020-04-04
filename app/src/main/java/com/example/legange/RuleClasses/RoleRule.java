@@ -1,6 +1,4 @@
-package com.example.legange.Class;
-
-import java.util.ArrayList;
+package com.example.legange.RuleClasses;
 
 public class RoleRule extends Rule {
 

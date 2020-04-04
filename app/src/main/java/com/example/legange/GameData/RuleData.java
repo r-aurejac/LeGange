@@ -1,9 +1,9 @@
 package com.example.legange.GameData;
 
-import com.example.legange.Class.BlackJackRule;
-import com.example.legange.Class.RandomPlayerRule;
-import com.example.legange.Class.Rule;
-import com.example.legange.Class.WritingRule;
+import com.example.legange.RuleClasses.BlackJackRule;
+import com.example.legange.RuleClasses.RandomPlayerRule;
+import com.example.legange.RuleClasses.Rule;
+import com.example.legange.RuleClasses.WritingRule;
 import com.example.legange.str;
 import java.util.ArrayList;
 import java.util.Collections;

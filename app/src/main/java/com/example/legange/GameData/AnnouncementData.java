@@ -1,7 +1,7 @@
 package com.example.legange.GameData;
 
-import com.example.legange.Class.Player;
-import com.example.legange.Class.Rule;
+import com.example.legange.RuleClasses.Player;
+import com.example.legange.RuleClasses.Rule;
 import com.example.legange.str;
 import java.util.ArrayList;
 

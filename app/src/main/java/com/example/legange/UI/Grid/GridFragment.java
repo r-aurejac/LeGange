@@ -1,4 +1,4 @@
-package com.example.legange.UI;
+package com.example.legange.UI.Grid;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.legange.Class.Player;
+import com.example.legange.RuleClasses.Player;
 import com.example.legange.R;
 import com.example.legange.RuleInterface;
 import com.example.legange.str;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 
 
-public class PirateFragment extends Fragment {
+public class GridFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -39,7 +39,7 @@ public class PirateFragment extends Fragment {
     int trap = 0;
     int attackerIndex = 0;
     LinearLayout linearLayout;
-    public PirateFragment() {
+    public GridFragment() {
         // Required empty public constructor
     }
 
@@ -49,11 +49,11 @@ public class PirateFragment extends Fragment {
      *
      * @param players Parameter 1.
 
-     * @return A new instance of fragment PirateFragment.
+     * @return A new instance of fragment GridFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static PirateFragment newInstance(ArrayList<Player> players) {
-        PirateFragment fragment = new PirateFragment();
+    public static GridFragment newInstance(ArrayList<Player> players) {
+        GridFragment fragment = new GridFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_PARAM1, players);
 

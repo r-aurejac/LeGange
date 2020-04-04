@@ -1,12 +1,11 @@
-package com.example.legange.Class;
+package com.example.legange.RuleClasses;
 
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import com.example.legange.R;
-import com.example.legange.UI.PirateFragment;
-import com.example.legange.UI.WriteFragment;
+import com.example.legange.UI.Grid.GridFragment;
 
 import java.util.ArrayList;
 
@@ -22,7 +21,7 @@ public class GridRule extends Rule {
     {
         //FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.game_linear_layout, PirateFragment.newInstance(players));
+        fragmentTransaction.replace(R.id.game_linear_layout, GridFragment.newInstance(players));
         fragmentTransaction.commit();
     }
 

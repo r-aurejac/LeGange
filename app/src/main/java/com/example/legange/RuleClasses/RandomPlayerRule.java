@@ -1,8 +1,5 @@
-package com.example.legange.Class;
+package com.example.legange.RuleClasses;
 
-
-import android.support.v4.app.FragmentManager;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -24,7 +21,7 @@ public class RandomPlayerRule extends Rule {
     {
         if (!playersAttributed) {
             for (int i = 0; i < playersNumber; i++) {
-                Log.d("test", "playerattribution a marché");
+
                 Player player = Player.getRandomPlayer(players);
                 String string = this.texts.get(this.getIndice()).replace("player" + String.valueOf(i + 1), player.getName());
                 //String string = this.texts.get(this.getIndice()).replace("player1" , player.getName());

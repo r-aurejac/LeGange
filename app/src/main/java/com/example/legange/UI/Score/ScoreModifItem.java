@@ -1,4 +1,4 @@
-package com.example.legange.UI;
+package com.example.legange.UI.Score;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,16 +6,26 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.legange.Class.Player;
+import com.example.legange.RuleClasses.Player;
 import com.example.legange.R;
 import com.example.legange.RuleInterface;
 
 
-public class ScoreItem extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+
+ * to handle interaction events.
+ * Use the {@link ScoreModifItem#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class ScoreModifItem extends  Fragment {
     // TODO: Rename parameter arguments, choose names that match
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
     private static final String PLAYER = "param1";
@@ -25,15 +35,15 @@ public class ScoreItem extends Fragment {
     private Player player;
 
     private RuleInterface mListener;
-
+    private Button buttonPlus, buttonMoins;
     private TextView nameText;
     private TextView scoreText;
-    public ScoreItem() {
+    public ScoreModifItem() {
         // Required empty public constructor
     }
 
-    public static ScoreItem newInstance(Player player) {
-        ScoreItem fragment = new ScoreItem();
+    public static ScoreModifItem newInstance(Player player) {
+        ScoreModifItem fragment = new ScoreModifItem();
         Bundle args = new Bundle();
         args.putSerializable(PLAYER, player);
         fragment.setArguments(args);
@@ -56,8 +66,23 @@ public class ScoreItem extends Fragment {
 
 
 
-        View view = inflater.inflate(R.layout.item_score, container, false);
-
+        View view = inflater.inflate(R.layout.item_score_modif, container, false);
+        buttonMoins = (Button) view.findViewById(R.id.button_moins);
+        buttonMoins.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                player.incrementScore(-1);
+                printScore();
+            }
+        });
+        buttonPlus = (Button) view.findViewById(R.id.button_plus);
+        buttonPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                player.incrementScore(+1);
+                printScore();
+            }
+        });
         scoreText = (TextView) view.findViewById(R.id.score_text);
         nameText = (TextView) view.findViewById(R.id.name_text);
         if (player != null) {
@@ -106,6 +131,8 @@ public class ScoreItem extends Fragment {
     }
 
 
+
 }
+
 
 

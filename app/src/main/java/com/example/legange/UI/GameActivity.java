@@ -6,21 +6,22 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 
-import com.example.legange.Class.BlackJackRule;
-import com.example.legange.Class.RandomPlayerRule;
-import com.example.legange.Class.Role;
-import com.example.legange.Class.WritingRule;
+import com.example.legange.RuleClasses.RandomPlayerRule;
+import com.example.legange.RuleClasses.RoleAttribution;
+import com.example.legange.RuleClasses.WritingRule;
 import com.example.legange.GameData.AnnouncementData;
-import com.example.legange.Class.Player;
+import com.example.legange.RuleClasses.Player;
 import com.example.legange.R;
 import com.example.legange.GameData.RoleData;
-import com.example.legange.Class.Rule;
+import com.example.legange.RuleClasses.Rule;
 import com.example.legange.GameData.RuleData;
 import com.example.legange.RuleInterface;
+import com.example.legange.UI.Grid.GridFragment;
+import com.example.legange.UI.Score.ScoreFragment;
+import com.example.legange.UI.SelectPlayer.SelectPlayerFragment;
 import com.example.legange.str;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
     private final static String PLAYERS = "players";
     ArrayList<Player> players;
     ArrayList<Rule> rules;
-    ArrayList<Role> roles;
+    ArrayList<RoleAttribution> roles;
     RuleData ruleData;
     LinearLayout gameLinearLayout;
     TableLayout scoreTableLayout;
@@ -127,9 +128,9 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
         RoleData roleData = new RoleData(players);
         AnnouncementData announcementData = new AnnouncementData();
 
-        roles = new ArrayList<Role>();
+        roles = new ArrayList<RoleAttribution>();
         for(int i = 0; i < players.size();i++) {
-            roles.add((Role) roleData.getRoles().get(i));
+            roles.add((RoleAttribution) roleData.getRoles().get(i));
             roles.get(i).playerAttribution(players.get(i));
         }
 
@@ -211,7 +212,7 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
         currentRule.setNextScreen(str.SCORE);
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.game_linear_layout, PirateFragment.newInstance(players));
+        fragmentTransaction.replace(R.id.game_linear_layout, GridFragment.newInstance(players));
 
         fragmentTransaction.commit();
     }
@@ -221,7 +222,7 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
     {
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.game_linear_layout, PersoRuleEndFragment.newInstance(currentRule.getRulePlayers().get(0),(currentRule.getPoints()))); //A BESOIN DE FIX
+        fragmentTransaction.replace(R.id.game_linear_layout, YesNoFragment.newInstance(currentRule.getRulePlayers().get(0),(currentRule.getPoints()))); //A BESOIN DE FIX
         fragmentTransaction.commit();
     }
     private void showPlayerSelection()

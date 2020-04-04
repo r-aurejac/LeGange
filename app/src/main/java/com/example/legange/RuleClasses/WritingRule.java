@@ -1,12 +1,9 @@
-package com.example.legange.Class;
+package com.example.legange.RuleClasses;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
-import com.example.legange.Class.Player;
-import com.example.legange.Class.Rule;
 import com.example.legange.R;
-import com.example.legange.UI.RuleFragment;
 import com.example.legange.UI.WriteFragment;
 
 import java.util.ArrayList;

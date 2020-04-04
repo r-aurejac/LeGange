@@ -14,10 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.example.legange.Class.Player;
-import com.example.legange.Class.WritingRule;
+import com.example.legange.RuleClasses.Player;
+import com.example.legange.RuleClasses.WritingRule;
 import com.example.legange.R;
-import com.example.legange.Class.Rule;
 import com.example.legange.RuleInterface;
 
 import java.util.ArrayList;
