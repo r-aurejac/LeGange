@@ -4,6 +4,7 @@ import com.example.legange.Class.Player;
 import com.example.legange.Class.Role;
 import com.example.legange.Class.RoleRule;
 import com.example.legange.Class.Rule;
+import com.example.legange.Class.WritingRule;
 import com.example.legange.str;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -87,9 +88,9 @@ public class RoleData {
     {
         ArrayList<Rule> Rules = new ArrayList<Rule>();
 
-        Rules.add(new RoleRule("Nouvelle règle",
-                "écrit la règle de son choix sur l'écran suivant, la sentance max est 1 cul sec ou 10 gorgées divisibles, pas de point en jeu ",
-                0, str.WRITE_NEW_RULE,player));
+        //Rules.add(new WritingRule("Nouvelle règle",
+          //      "écrit la règle de son choix sur l'écran suivant, la sentance max est 1 cul sec ou 10 gorgées divisibles, pas de point en jeu ",
+            //    0, str.UNKNOWN,0,1));
 
         Rules.add(new RoleRule("Mutinerie",
                 "Une rebellion a été lancé par le charismatique player, si il réussi il deviendra le nouveau chef. Choisissez au bout de 3 de trahir le chef ou de rester fidèle, les minoritaires (y compris le chef) perdent 2 points et boivent 3 gorgées ",

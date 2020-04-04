@@ -85,10 +85,7 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
                     showRule();
                 else if (currentRule.getNextScreen() == str.SCORE)
                     showScore();
-                else if (currentRule.getNextScreen() == str.WRITE_NEW_RULE)
-                    showWritingRule(1);
-                else if (currentRule.getNextScreen() == str.WRITE)
-                    showWritingRule(players.size());
+
                 else if (currentRule.getNextScreen() == str.GIFT)
                     openGift();
                 else if (currentRule.getNextScreen() == str.PIRATE)
@@ -120,7 +117,8 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
     public void OnChefRuleEnd(String rule) {
         Rule chefRule = new WritingRule("Règle du Chef",rule,0,str.UNKNOWN,1,1);
         rules.add(chefRule);
-        nextRule();
+        showRule();
+
     }
 
 
@@ -196,15 +194,7 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
 
 
     }
-    private void showWritingRule(int phases)
-    {
-        FragmentManager fragmentManager = this.getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.game_linear_layout, WriteFragment.newInstance(currentRule, players,phases));
 
-
-        fragmentTransaction.commit();
-    }
 
 
     private void showScore()

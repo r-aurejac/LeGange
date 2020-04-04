@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class WritingRule extends RandomPlayerRule {
 
-    int phases =0;
+    public int phases =0;
 
     public WritingRule(String name, String description, int points, int nextScreen, int playersNumber, int phases) {
         super(name, description, points, nextScreen, playersNumber);

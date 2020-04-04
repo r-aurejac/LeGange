@@ -15,6 +15,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.legange.Class.Player;
+import com.example.legange.Class.WritingRule;
 import com.example.legange.R;
 import com.example.legange.Class.Rule;
 import com.example.legange.RuleInterface;
@@ -32,7 +33,7 @@ public class WriteFragment extends Fragment {
     private boolean isWritingPhase = true;
     // TODO: Rename and change types of parameters
     private ArrayList players;
-    private Rule rule;
+    private WritingRule rule;
     private ArrayList<String> texts;
     private RuleInterface mListener;
     private Button validerButton;
@@ -45,7 +46,7 @@ public class WriteFragment extends Fragment {
     }
 
 
-    public static WriteFragment newInstance( Rule rule,ArrayList<Player> players, int phases) {
+    public static WriteFragment newInstance( WritingRule rule,ArrayList<Player> players, int phases) {
         WriteFragment fragment = new WriteFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_PARAM1, players);
@@ -60,7 +61,7 @@ public class WriteFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             players = (ArrayList<Player>) getArguments().getSerializable(ARG_PARAM1);
-            rule = (Rule) getArguments().getSerializable(ARG_PARAM2);
+            rule = (WritingRule) getArguments().getSerializable(ARG_PARAM2);
             phases = getArguments().getInt(ARG_PARAM3);
         }
     }
@@ -94,7 +95,7 @@ public class WriteFragment extends Fragment {
                 read();
 
             }
-            else if (phases == 1)
+            else if ( rule.phases == 1)
             {
                 mListener.OnChefRuleEnd(texts.get(0));
             }
