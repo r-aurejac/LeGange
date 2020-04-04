@@ -36,6 +36,10 @@ public class RuleData {
    private void setRules()
    {
 
+       Rules.add(new RandomPlayerRule("COVID 19",
+               "player1 a attrapé le coronavirus. Pas de chance, il perd 1 point et bois la moitié de son verre. Il choisit deux joueurs à qui il transmet le virus ainsi que la sentence",
+               -1, str.GROUP,1));
+
        Rules.add(new RandomPlayerRule("chifumi",
                "player1 tente de gagné 1 points en défiant le joueur de son choix au shi fu mi,il choisit combien de gorgées seront bu par le perdant",
                1, str.PERSO,1));
@@ -111,6 +115,7 @@ public class RuleData {
        Rules.add(new RandomPlayerRule("cadeau",
                "player1 gagne un cadeau, il peut choisir de l'ouvrir ou non (La récompense s'affiche à l'écran suivant)",
                0, str.GIFT,1));
+
 
        //REGLE A PLUSIEURS ECRANS
        /*
