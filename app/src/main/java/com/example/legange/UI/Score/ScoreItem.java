@@ -12,19 +12,17 @@ import android.widget.TextView;
 import com.example.legange.RuleClasses.Player;
 import com.example.legange.R;
 import com.example.legange.RuleInterface;
+import com.example.legange.UI.BaseFragment;
 
 
-public class ScoreItem extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class ScoreItem extends BaseFragment {
+
 
     private static final String PLAYER = "param1";
     private LinearLayout linearLayout;
-    // TODO: Rename and change types of parameters
+
 
     private Player player;
-
-    private RuleInterface mListener;
 
     private TextView nameText;
     private TextView scoreText;
@@ -88,22 +86,6 @@ public class ScoreItem extends Fragment {
     }
 
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof RuleInterface) {
-            mListener = (RuleInterface) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
 
 
 }

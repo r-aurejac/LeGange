@@ -14,25 +14,25 @@ import android.widget.Toast;
 import com.example.legange.RuleClasses.Player;
 import com.example.legange.R;
 import com.example.legange.RuleInterface;
+import com.example.legange.UI.BaseFragment;
 import com.example.legange.str;
 
 import java.util.ArrayList;
 
 
 
-public class GridFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class GridFragment extends BaseFragment {
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+
     private ArrayList<Player> players;
     private ArrayList<Player> attackers;
 
     private  TextView tvs[];
     private Player pirate;
-    private RuleInterface mListener;
+
     private String name;
     int turnIndex = 0;
     int treasure = 0;
@@ -43,15 +43,7 @@ public class GridFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param players Parameter 1.
 
-     * @return A new instance of fragment GridFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static GridFragment newInstance(ArrayList<Player> players) {
         GridFragment fragment = new GridFragment();
         Bundle args = new Bundle();
@@ -89,24 +81,6 @@ public class GridFragment extends Fragment {
         return view;
     }
 
-
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof RuleInterface) {
-            mListener = (RuleInterface) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
 
    private  void initViews(View view)
    {

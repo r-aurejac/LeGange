@@ -16,7 +16,7 @@ import com.example.legange.RuleInterface;
 import java.util.ArrayList;
 
 
-public class BlackJackFragment extends Fragment {
+public class BlackJackFragment extends BaseFragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -26,7 +26,7 @@ public class BlackJackFragment extends Fragment {
     private ArrayList<Player> players;
 
 
-    private RuleInterface mListener;
+
     private int score,playerIndex;
     public BlackJackFragment() {
         // Required empty public constructor
@@ -123,32 +123,6 @@ public class BlackJackFragment extends Fragment {
         mListener.toPlayerSelection();
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof RuleInterface) {
-            mListener = (RuleInterface) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
 
 }

@@ -14,12 +14,13 @@ import android.widget.LinearLayout;
 import com.example.legange.RuleClasses.Player;
 import com.example.legange.R;
 import com.example.legange.RuleInterface;
+import com.example.legange.UI.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class ScoreFragment extends Fragment {
+public class ScoreFragment extends BaseFragment {
 
 
     private static final String PLAYER = "param1";
@@ -28,7 +29,6 @@ public class ScoreFragment extends Fragment {
 
     private ArrayList<Player> players;
 
-    private RuleInterface mListener;
     Boolean correction = false;
     public ScoreFragment() {
         // Required empty public constructor
@@ -110,22 +110,7 @@ public class ScoreFragment extends Fragment {
         fragmentTransaction.commit();
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof RuleInterface) {
-            mListener = (RuleInterface) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
 
 
 }

@@ -14,7 +14,7 @@ import com.example.legange.R;
 import com.example.legange.RuleInterface;
 
 
-public class YesNoFragment extends Fragment  {
+public class YesNoFragment extends BaseFragment  {
 
 
     private static final String PLAYER = "param1";
@@ -25,7 +25,7 @@ public class YesNoFragment extends Fragment  {
     private Button nonButton;
     private Player player;
 
-    private RuleInterface mListener;
+
 
     public YesNoFragment() {
         // Required empty public constructor
@@ -94,22 +94,6 @@ public class YesNoFragment extends Fragment  {
     }
 
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof RuleInterface) {
-            mListener = (RuleInterface) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
 
 
 
