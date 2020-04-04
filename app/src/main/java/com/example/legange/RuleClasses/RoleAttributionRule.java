@@ -1,12 +1,12 @@
 package com.example.legange.RuleClasses;
 
 
-public class RoleAttribution extends Rule {
+public class RoleAttributionRule extends Rule {
 
 
     public Player player;
 
-    public RoleAttribution(String name, String description, int points, int nextScreen) {
+    public RoleAttributionRule(String name, String description, int points, int nextScreen) {
         super(name, description, points, nextScreen);
 
 

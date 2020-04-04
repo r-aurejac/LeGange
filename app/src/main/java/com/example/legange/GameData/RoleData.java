@@ -1,7 +1,7 @@
 package com.example.legange.GameData;
 
 import com.example.legange.RuleClasses.Player;
-import com.example.legange.RuleClasses.RoleAttribution;
+import com.example.legange.RuleClasses.RoleAttributionRule;
 import com.example.legange.RuleClasses.RoleRule;
 import com.example.legange.RuleClasses.Rule;
 import com.example.legange.str;
@@ -25,36 +25,36 @@ public class RoleData {
 
     private void setRoles()
     {
-        roles.add(new RoleAttribution(str.CREME,
+        roles.add(new RoleAttributionRule(str.CREME,
                 "player est la crème. Il est tellement sympa que si il remporte le Gange il le partagera avec le deuxième joueur ayant le moins de point",
                 0, str.UNKNOWN));
 
-        roles.add(new RoleAttribution(str.VICTIME,
+        roles.add(new RoleAttributionRule(str.VICTIME,
                 "player est la victime. Les gorgées qui lui sont distribuées sont doublées.",
                 0, str.UNKNOWN));
 
-        roles.add(new RoleAttribution(str.PRECOCE,
+        roles.add(new RoleAttributionRule(str.PRECOCE,
                 "player est le précoce. Toujours en avance, il Cul-sec un verre avant de commencer le jeu.",
                 0, str.UNKNOWN));
 
-        roles.add(new RoleAttribution(str.CHANCEUX,
+        roles.add(new RoleAttributionRule(str.CHANCEUX,
                 "player est le chanceux. Il commence avec 1 points supplémentaires, LA CHANCE.", 1, str.UNKNOWN));
 
-        roles.add(new RoleAttribution(str.ATTARDE,
+        roles.add(new RoleAttributionRule(str.ATTARDE,
                 "player est l'attardé il dispose d'une vie pour annuler sa défaite lors d'un jeu, c'est pas de sa faute il n'avait pas compris",
                 0, str.UNKNOWN));
 
-        roles.add(new RoleAttribution(str.VOLEUR,
+        roles.add(new RoleAttributionRule(str.VOLEUR,
                 "player est le voleur",
                 0, str.UNKNOWN));
 
-        roles.add(new RoleAttribution(str.PARIEUR,
+        roles.add(new RoleAttributionRule(str.PARIEUR,
                 "player est le parieur , il choisit 2 joueurs et déisgne lequel sera devant au classement ",
                 0, str.UNKNOWN));
 
         //toujours avoir un meneur ---> il est placé à l'indice 0 après le mélange
         Collections.shuffle(roles);
-        roles.add(new RoleAttribution(str.CHEF,
+        roles.set(0,new RoleAttributionRule(str.CHEF,
                 "player est le Meneur, son charisme naturel fait que tout le monde l'écoute, c'est à lui de trancher en cas d'égalité ",
                 0, str.UNKNOWN));
 

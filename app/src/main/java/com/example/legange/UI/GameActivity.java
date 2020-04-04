@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 
 import com.example.legange.RuleClasses.RandomPlayerRule;
-import com.example.legange.RuleClasses.RoleAttribution;
+import com.example.legange.RuleClasses.RoleAttributionRule;
 import com.example.legange.RuleClasses.WritingRule;
 import com.example.legange.GameData.AnnouncementData;
 import com.example.legange.RuleClasses.Player;
@@ -45,7 +45,7 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
     private final static String PLAYERS = "players";
     ArrayList<Player> players;
     ArrayList<Rule> rules;
-    ArrayList<RoleAttribution> roles;
+    ArrayList<RoleAttributionRule> roles;
     RuleData ruleData;
     LinearLayout gameLinearLayout;
     TableLayout scoreTableLayout;
@@ -128,9 +128,9 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
         RoleData roleData = new RoleData(players);
         AnnouncementData announcementData = new AnnouncementData();
 
-        roles = new ArrayList<RoleAttribution>();
+        roles = new ArrayList<RoleAttributionRule>();
         for(int i = 0; i < players.size();i++) {
-            roles.add((RoleAttribution) roleData.getRoles().get(i));
+            roles.add((RoleAttributionRule) roleData.getRoles().get(i));
             roles.get(i).playerAttribution(players.get(i));
         }
 
