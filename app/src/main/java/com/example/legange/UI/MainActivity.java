@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button jouerButton,creditButton,testButton;
+    private Button jouerButton, fragmentTest, gameTestButton;
 
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -36,16 +36,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        creditButton = (Button) findViewById(R.id.button_credit);
-        creditButton.setOnClickListener(new View.OnClickListener() {
+        fragmentTest = (Button) findViewById(R.id.button_fragment_test);
+        fragmentTest.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = AddPlayerActivity.newIntent(getApplicationContext());
+                Intent intent = TestActivity.newIntent(getApplicationContext());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getApplicationContext().startActivity(intent);
             }
         });
 
-        testButton = (Button) findViewById(R.id.button_test);
-        testButton.setOnClickListener(new View.OnClickListener() {
+        gameTestButton = (Button) findViewById(R.id.button_test);
+        gameTestButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ArrayList<Player> players = new ArrayList<>();
                 for(int i =0; i< str.MAX_PLAYER_NUMBER; i++)

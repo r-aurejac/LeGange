@@ -16,20 +16,20 @@ import com.example.legange.RuleInterface;
 import java.util.ArrayList;
 
 
-public class RuleFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class RuleFragment extends BaseFragment {
+
+
     private static final String RULE = "param1";
     private static final String PLAYERS = "param2";
     private static final String INDICE = "param3";
-    // TODO: Rename and change types of parameters
+
     private Rule rule;
     private ArrayList<Player> players;
     private TextView ruleText,titleText;
-    private RuleInterface mListener;
+
     private int indice = 0;
     public RuleFragment() {
-        // Required empty public constructor
+
     }
 
     public static RuleFragment newInstance(Rule rule, ArrayList<Player> players,int indice) {
@@ -81,22 +81,7 @@ public class RuleFragment extends Fragment {
 
 
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof RuleInterface) {
-            mListener = (RuleInterface) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
 
 
 }

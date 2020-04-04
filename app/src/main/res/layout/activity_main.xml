@@ -31,25 +31,24 @@
         android:layout_marginBottom="100dp"
         android:text="Jouer"
         android:textSize="36sp"
-        app:layout_constraintBottom_toTopOf="@+id/button_credit"
+        app:layout_constraintBottom_toTopOf="@+id/button_fragment_test"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/player_tv" />
 
     <Button
-        android:id="@+id/button_credit"
+        android:id="@+id/button_fragment_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="frag test"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="credits" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="test"
+        android:text="partie rapide"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

@@ -27,7 +27,7 @@ public class str {
     public static final String CHANCEUX = "Chanceux";
     public static final String  VICTIME = "Victime";
     public static final String PRECOCE = "Précoce";
-    public static final String CREME = "Creme";
+    public static final String CREME = "Crème";
     public  static  final String ATTARDE = "Généreux";
     public  static  final String VOLEUR = "Juif";
    

@@ -54,7 +54,7 @@ public class RoleData {
 
         //toujours avoir un meneur ---> il est placé à l'indice 0 après le mélange
         Collections.shuffle(roles);
-        roles.set(0,new RoleAttributionRule(str.CHEF,
+        roles.add(0,new RoleAttributionRule(str.CHEF,
                 "player est le Meneur, son charisme naturel fait que tout le monde l'écoute, c'est à lui de trancher en cas d'égalité ",
                 0, str.UNKNOWN));
 
