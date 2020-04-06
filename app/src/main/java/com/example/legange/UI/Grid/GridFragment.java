@@ -1,8 +1,6 @@
 package com.example.legange.UI.Grid;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +9,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.legange.RuleClasses.Player;
+import com.example.legange.Player.Player;
 import com.example.legange.R;
-import com.example.legange.RuleInterface;
+import com.example.legange.Player.PlayerList;
 import com.example.legange.UI.BaseFragment;
 import com.example.legange.str;
 
@@ -74,7 +72,7 @@ public class GridFragment extends BaseFragment {
                 attackers.add(players.get(i));
 
         }
-        pirate = Player.findPlayerByRole(players,str.VOLEUR);
+        pirate = PlayerList.findPlayerByRole(str.VOLEUR);
         initViews(view);
 
 

@@ -1,5 +1,8 @@
-package com.example.legange.RuleClasses;
+package com.example.legange.Rule;
 
+
+import com.example.legange.Player.Player;
+import com.example.legange.Player.PlayerList;
 
 import java.util.ArrayList;
 
@@ -14,15 +17,16 @@ public class RandomPlayerRule extends Rule {
         super(name, description, points, nextScreen);
 
     this.playersNumber = playersNumber;
+    playersAttribution();
     }
 
 
-    public void playersAttribution(ArrayList<Player> players)
+    public void playersAttribution()
     {
         if (!playersAttributed) {
             for (int i = 0; i < playersNumber; i++) {
 
-                Player player = Player.getRandomPlayer(players);
+                Player player = PlayerList.getRandomPlayer();
                 String string = this.texts.get(this.getIndice()).replace("player" + String.valueOf(i + 1), player.getName());
                 //String string = this.texts.get(this.getIndice()).replace("player1" , player.getName());
                 this.texts.set(this.getIndice(), string);

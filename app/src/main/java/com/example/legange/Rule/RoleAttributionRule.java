@@ -1,5 +1,7 @@
-package com.example.legange.RuleClasses;
+package com.example.legange.Rule;
 
+
+import com.example.legange.Player.Player;
 
 public class RoleAttributionRule extends Rule {
 

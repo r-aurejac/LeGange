@@ -12,8 +12,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.legange.RuleClasses.Player;
+import com.example.legange.Player.Player;
 import com.example.legange.R;
+import com.example.legange.Player.PlayerList;
 import com.example.legange.RuleInterface;
 
 import java.util.ArrayList;
@@ -102,7 +103,7 @@ public class SelectPlayerFragment extends Fragment {
         for(SelectPlayerItem selectPlayerItem : selectPlayerItems) {
 
             if(selectPlayerItem.playerCb.isChecked())
-           Player.findPlayerByName(players,selectPlayerItem.player.getName()).incrementScore(points);
+                PlayerList.findPlayerByName(selectPlayerItem.player.getName()).incrementScore(points);
         }
         mListener.toScore();
 

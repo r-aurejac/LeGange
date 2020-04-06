@@ -9,11 +9,7 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 
 import com.example.legange.R;
-import com.example.legange.RuleClasses.Player;
 import com.example.legange.RuleInterface;
-import com.example.legange.UI.Score.ScoreFragment;
-
-import java.util.ArrayList;
 
 //Activité pour tester des fragments
 public class TestActivity extends AppCompatActivity implements RuleInterface {

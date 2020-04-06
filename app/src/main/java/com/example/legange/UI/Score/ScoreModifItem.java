@@ -1,8 +1,6 @@
 package com.example.legange.UI.Score;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +8,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.legange.RuleClasses.Player;
+import com.example.legange.Player.Player;
 import com.example.legange.R;
-import com.example.legange.RuleInterface;
 import com.example.legange.UI.BaseFragment;
 
 

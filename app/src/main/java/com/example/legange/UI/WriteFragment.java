@@ -1,9 +1,6 @@
 package com.example.legange.UI;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.example.legange.RuleClasses.Player;
-import com.example.legange.RuleClasses.WritingRule;
+import com.example.legange.Player.Player;
+import com.example.legange.Rule.WritingRule;
 import com.example.legange.R;
-import com.example.legange.RuleInterface;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -29,7 +29,7 @@ public class str {
     public static final String PRECOCE = "Précoce";
     public static final String CREME = "Crème";
     public  static  final String ATTARDE = "Généreux";
-    public  static  final String VOLEUR = "Juif";
+    public  static  final String VOLEUR = "Voleur";
    
 
 

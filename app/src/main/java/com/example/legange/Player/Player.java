@@ -1,8 +1,6 @@
-package com.example.legange.RuleClasses;
+package com.example.legange.Player;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Random;
 
 public class Player implements Serializable, Comparable {
 
@@ -56,30 +54,7 @@ public class Player implements Serializable, Comparable {
         this.name = name;
     }
 
-    public static Player findPlayerByName(ArrayList<Player> players, String name)
-    {
-        for(Player player : players) {
-            if (player.name.equals(name))
-                return player;
 
-        }
-        return null;
-    }
-    public static Player findPlayerByRole(ArrayList<Player> players, String role)
-    {
-        for(Player player : players) {
-            if (player.role.equals(role))
-                return player;
-
-        }
-        return null;
-    }
-
-    public static Player getRandomPlayer(ArrayList<Player> players)
-    {
-        Random r = new Random();
-        return players.get( r.nextInt((players.size()-1 - 0) + 1) + 0);
-    }
 
     @Override
     public int compareTo(Object o) {

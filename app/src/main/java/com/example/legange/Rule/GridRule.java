@@ -1,9 +1,10 @@
-package com.example.legange.RuleClasses;
+package com.example.legange.Rule;
 
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
+import com.example.legange.Player.Player;
 import com.example.legange.R;
 import com.example.legange.UI.Grid.GridFragment;
 

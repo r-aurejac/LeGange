@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.legange.RuleClasses.Player;
+import com.example.legange.Player.Player;
 import com.example.legange.R;
 import com.example.legange.str;
 

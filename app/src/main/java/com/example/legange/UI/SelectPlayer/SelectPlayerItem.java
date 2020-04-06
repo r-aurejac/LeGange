@@ -10,7 +10,7 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.legange.RuleClasses.Player;
+import com.example.legange.Player.Player;
 import com.example.legange.R;
 import com.example.legange.RuleInterface;
 
