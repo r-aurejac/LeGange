@@ -34,7 +34,7 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
 
     LinearLayout linearLayout;
     int roleIndex = 0;
-
+    RoleData roleData;
     int announcementIndex = 0;
 
     int ruleIndex = 0;
@@ -46,7 +46,7 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
     private final static String PLAYERS = "players";
     ArrayList<Player> players;
     ArrayList<Rule> rules;
-    ArrayList<RoleAttributionRule> roles;
+
     RuleData ruleData;
     LinearLayout gameLinearLayout;
     TableLayout scoreTableLayout;
@@ -66,7 +66,7 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
 
         Collections.shuffle(players);
         PlayerList.setPlayerList(players);
-        roleAttributions();
+        roleData = new RoleData(players);
         ruleData = new RuleData();
         gameLinearLayout = (LinearLayout) findViewById(R.id.game_linear_layout);
 
@@ -74,36 +74,24 @@ public class GameActivity extends AppCompatActivity implements RuleInterface {
 
 
     }
-    private void roleAttributions()
-    {
-        RoleData roleData = new RoleData(players);
-        roles = new ArrayList<RoleAttributionRule>();
-        for(int i = 0; i < players.size();i++) {
-            roles.add((RoleAttributionRule) roleData.getRoles().get(i));
-            roles.get(i).playerAttribution(players.get(i));
-        }
-    }
+
 
 
     private void organizeRules()
     {
-
         AnnouncementData announcementData = new AnnouncementData();
-
-
-
 
         rules = new ArrayList<>();
 
-        Collections.shuffle(rules);
 
 
-        for(int i = 0; i < roles.size(); i++)
-        rules.add(i,roles.get(i));
 
-        for(int i = 0; i < announcementData.getAnnouncement().size(); i++)
-            rules.add(i,announcementData.getAnnouncement().get(i));
 
+        rules.add(announcementData.getAnnouncement().get(0));
+
+        for(int i = 0; i < players.size(); i++)
+            rules.add(roleData.getRoles().get(i));
+        rules.add(announcementData.getAnnouncement().get(1));
         for(Rule rule : ruleData.getRules())
             rules.add(rule);
 

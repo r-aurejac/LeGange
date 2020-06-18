@@ -12,7 +12,7 @@ import java.util.Collections;
 public class RoleData {
 
 
-    public ArrayList<Rule> roles;
+    public ArrayList<RoleAttributionRule> roles;
     ArrayList<Player> players;
 
 
@@ -59,11 +59,14 @@ public class RoleData {
                 "player est le Meneur, son charisme naturel fait que tout le monde l'écoute, c'est à lui de trancher en cas d'égalité ",
                 0, str.UNKNOWN));
 
+        for(int i = 0; i < players.size(); i++)
+            roles.get(i).playerAttribution(players.get(i));
+
     }
 
 
 
-    public ArrayList<Rule> getRoles()
+    public ArrayList<RoleAttributionRule> getRoles()
     {
         return roles;
     }
