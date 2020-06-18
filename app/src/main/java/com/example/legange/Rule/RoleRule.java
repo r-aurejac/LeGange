@@ -1,6 +1,6 @@
 package com.example.legange.Rule;
 
-import com.example.legange.Player.Player;
+
 import com.example.legange.Player.PlayerList;
 
 public class RoleRule extends Rule {
