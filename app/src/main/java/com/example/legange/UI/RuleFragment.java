@@ -60,7 +60,7 @@ public class RuleFragment extends BaseFragment {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.onRuleEnd();
+                mListener.toNextScreen();
             }
         });
         ruleText = (TextView) view.findViewById(R.id.rule_text_view);
@@ -68,7 +68,7 @@ public class RuleFragment extends BaseFragment {
         ruleText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.onRuleEnd();
+                mListener.toNextScreen();
             }
         });
         titleText =(TextView) view.findViewById(R.id.title_text_view);

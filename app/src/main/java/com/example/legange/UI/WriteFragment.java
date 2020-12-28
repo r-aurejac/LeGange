@@ -95,7 +95,7 @@ public class WriteFragment extends BaseFragment {
                 mListener.OnChefRuleEnd(texts.get(0));
             }
         }
-        else mListener.toPlayerSelection();
+        else mListener.toNextScreen();
     }
     private void read()
     {

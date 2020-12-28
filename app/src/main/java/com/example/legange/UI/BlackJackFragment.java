@@ -117,7 +117,7 @@ public class BlackJackFragment extends BaseFragment {
             else if (player.getRule_score()>21)
                 player.incrementScore(-1);
         }
-        mListener.toPlayerSelection();
+        mListener.toNextScreen();
     }
 
 

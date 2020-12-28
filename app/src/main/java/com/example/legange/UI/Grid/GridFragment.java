@@ -118,7 +118,7 @@ public class GridFragment extends BaseFragment {
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.toNextRule();
+                mListener.toNextScreen();
             }
         });
         linearLayout.addView(tv);
@@ -134,7 +134,7 @@ public class GridFragment extends BaseFragment {
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.toNextRule();
+                mListener.toNextScreen();
             }
         });
         linearLayout.addView(tv);

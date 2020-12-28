@@ -6,8 +6,8 @@ import com.example.legange.Player.PlayerList;
 public class RoleRule extends Rule {
     boolean playersAttributed = false;
 
-    public RoleRule(String name, String description, int points, String role, int nextScreen) {
-        super(name, description, points, nextScreen);
+    public RoleRule(String name, String description, int points, String role) {
+        super(name, description, points);
 
         if(PlayerList.findPlayerByRole(role) != null)
             this.getRulePlayers().add(PlayerList.findPlayerByRole(role));

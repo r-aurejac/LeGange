@@ -62,7 +62,7 @@ public class ScoreItem extends BaseFragment {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.toNextRule();
+                mListener.toNextRule();;
             }
         });
         return view;

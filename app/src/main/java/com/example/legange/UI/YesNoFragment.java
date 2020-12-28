@@ -59,7 +59,7 @@ public class YesNoFragment extends BaseFragment  {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.toNextRule();
+                mListener.toNextScreen();
             }
         });
 
@@ -82,12 +82,12 @@ public class YesNoFragment extends BaseFragment  {
         if(points>0)
         player.incrementScore(points);
 
-        mListener.toScore();
+        mListener.toNextScreen();
    }
     private void onNonClicked() {
         if(points<0)
             player.incrementScore(points);
-        mListener.toScore();
+        mListener.toNextScreen();
     }
 
 

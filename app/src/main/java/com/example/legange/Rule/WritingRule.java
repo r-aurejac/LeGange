@@ -13,8 +13,8 @@ public class WritingRule extends RandomPlayerRule {
 
     public int phases =0;
 
-    public WritingRule(String name, String description, int points, int nextScreen, int playersNumber, int phases) {
-        super(name, description, points, nextScreen, playersNumber);
+    public WritingRule(String name, String description, int points, int playersNumber, int phases) {
+        super(name, description, points, playersNumber);
 
         this.phases = phases;
         size++;

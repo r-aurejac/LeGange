@@ -15,8 +15,8 @@ public class BlackJackRule extends Rule {
 
 
 
-    public BlackJackRule(String name, String description, int points, int nextScreen) {
-        super(name, description, points, nextScreen);
+    public BlackJackRule(String name, String description, int points) {
+        super(name, description, points);
         size = 2;
     }
 

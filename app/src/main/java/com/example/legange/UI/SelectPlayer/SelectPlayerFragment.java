@@ -67,7 +67,7 @@ public class SelectPlayerFragment extends Fragment {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.toNextRule();
+                mListener.toNextScreen();
             }
         });
         selectPlayerItems = new ArrayList<SelectPlayerItem>();
@@ -105,7 +105,7 @@ public class SelectPlayerFragment extends Fragment {
             if(selectPlayerItem.playerCb.isChecked())
                 PlayerList.findPlayerByName(selectPlayerItem.player.getName()).incrementScore(points);
         }
-        mListener.toScore();
+        mListener.toNextScreen();
 
     }
 

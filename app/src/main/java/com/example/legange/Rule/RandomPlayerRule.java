@@ -13,8 +13,8 @@ public class RandomPlayerRule extends Rule {
     int playersNumber = 0;
     boolean playersAttributed = false;
 
-    public RandomPlayerRule(String name, String description, int points, int nextScreen, int playersNumber) {
-        super(name, description, points, nextScreen);
+    public RandomPlayerRule(String name, String description, int points, int playersNumber) {
+        super(name, description, points);
 
     this.playersNumber = playersNumber;
     playersAttribution();

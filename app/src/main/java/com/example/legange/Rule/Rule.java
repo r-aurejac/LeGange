@@ -21,7 +21,6 @@ public class Rule implements Serializable {
         this.points = points;
     }
 
-    public void setNextScreen(int nextscreen) {this.nextScreen = nextscreen;}
 
     private String name;
 
@@ -43,10 +42,6 @@ public class Rule implements Serializable {
 
 
 
-    public int getNextScreen() {
-        return nextScreen;
-    }
-
     public int getIndice() {
         return indice;
     }
@@ -63,20 +58,18 @@ public class Rule implements Serializable {
 
     protected int size = 1;
 
-    private int nextScreen;
     private static final int ROLE_ATTRIBUTION = 0;
     private static final int TEXT = 1;
 
     public ArrayList<String> texts;
 
-    public Rule(String name, String description,int points, int nextScreen)
+    public Rule(String name, String description,int points)
     {
         texts = new  ArrayList<String>();
         texts.add(description);
         this.name = name;
 
         this.points = points;
-        this.nextScreen = nextScreen;
         rulePlayers = new ArrayList<>();
 
     }

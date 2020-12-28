@@ -46,12 +46,7 @@ public class TestActivity extends AppCompatActivity implements RuleInterface {
     }
 
     @Override
-    public void onRuleEnd() {
-
-    }
-
-    @Override
-    public void toScore() {
+    public void toNextScreen() {
 
     }
 
@@ -59,6 +54,9 @@ public class TestActivity extends AppCompatActivity implements RuleInterface {
     public void toNextRule() {
 
     }
+
+
+
 
     @Override
     public void toPlayerSelection() {

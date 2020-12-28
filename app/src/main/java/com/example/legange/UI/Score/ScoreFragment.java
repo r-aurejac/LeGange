@@ -1,8 +1,11 @@
 package com.example.legange.UI.Score;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +24,10 @@ public class ScoreFragment extends BaseFragment {
 
 
     private static final String PLAYER = "param1";
+    private static final String RULEINFO = "param2";
     private LinearLayout linearLayout;
-    private Button buttonCorrection;
-
+    private Button buttonCorrection,buttonInfo;
+    private String ruleInfo = "Aucune info disponible";
     private ArrayList<Player> players;
 
     Boolean correction = false;
@@ -31,10 +35,11 @@ public class ScoreFragment extends BaseFragment {
         // Required empty public constructor
     }
 
-    public static ScoreFragment newInstance(ArrayList<Player> players) {
+    public static ScoreFragment newInstance(ArrayList<Player> players, String ruleInfo) {
         ScoreFragment fragment = new ScoreFragment();
         Bundle args = new Bundle();
         args.putSerializable(PLAYER, players);
+        args.putString(RULEINFO,ruleInfo);
         fragment.setArguments(args);
         return fragment;
     }
@@ -44,6 +49,7 @@ public class ScoreFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             players = (ArrayList<Player>) getArguments().getSerializable(PLAYER);
+            ruleInfo = (String) getArguments().getString(RULEINFO);
         }
 
     }
@@ -59,15 +65,23 @@ public class ScoreFragment extends BaseFragment {
         buttonCorrection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(correction == false)
+                if(!correction)
                 showCorrection();
                 else showScore();
+            }
+        });
+        buttonInfo = view.findViewById(R.id.info_button);
+        buttonInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showRuleInfo();
             }
         });
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 mListener.toNextRule();
             }
         });
@@ -108,7 +122,20 @@ public class ScoreFragment extends BaseFragment {
     }
 
 
+    void showRuleInfo()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage(ruleInfo)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // FIRE ZE MISSILES!
+                    }
+                });
 
+        // Create the AlertDialog object and return it
+        builder.create();
+        builder.show();
+    }
 
 }
 

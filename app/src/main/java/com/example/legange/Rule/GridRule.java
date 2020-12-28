@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class GridRule extends Rule {
 
     public GridRule(String name, String description, int points, int nextScreen) {
-        super(name, description, points, nextScreen);
+        super(name, description, points);
     }
 
 

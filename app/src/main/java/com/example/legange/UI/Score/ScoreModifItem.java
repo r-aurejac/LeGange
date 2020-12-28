@@ -82,7 +82,7 @@ public class ScoreModifItem extends BaseFragment {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.toNextRule();
+                mListener.toNextScreen();
             }
         });
         return view;

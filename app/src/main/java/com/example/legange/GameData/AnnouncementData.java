@@ -28,10 +28,10 @@ public class AnnouncementData {
     {
         announcements.add(new Rule("introduction",
                 "Bienvenue au tournois du Gange, tous les joueurs ici présents vont s'affronter pour tenter de gagner le droit de boire l'eau du fleuve le plus sacré du monde",
-                0, str.ANNOUNCEMENT));
+                0));
         announcements.add(new Rule("Cérémonie du Gange",
                 "Chaque joueur verse la quantité qu'il désire de son verre dans le Gange. L'Hindou du groupe peut ajouter ce qu'il désire",0
-                , str.ANNOUNCEMENT));
+                ));
     }
 
     public ArrayList<Rule> getAnnouncement()
@@ -41,11 +41,10 @@ public class AnnouncementData {
 
     private void setEndAnnouncement() {
         endAnnouncements.add(new Rule("Purification par le Gange",
-                "player a été désigné par les dieux Hindous, il remporte la Sainte Eau du Gange",0,
-                str.END_ANNOUNCEMENT));
+                "player a été désigné par les dieux Hindous, il remporte la Sainte Eau du Gange",0));
         endAnnouncements.add(new Rule("Enrichissement par le gange",
                 "player est l'élu, il a le score le plus faible, mais étant très généreux il peut partager son brevage avec player2",
-                0, str.END_ANNOUNCEMENT));
+                0));
     }
 
 
