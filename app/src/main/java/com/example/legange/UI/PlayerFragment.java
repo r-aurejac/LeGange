@@ -2,15 +2,18 @@ package com.example.legange.UI;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.legange.Item.Item;
 import com.example.legange.Player.Player;
 import com.example.legange.R;
-import com.example.legange.RuleInterface;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,13 +25,14 @@ public class PlayerFragment extends BaseFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String PLAYER = "param1";
-
+    private static final String INCOMMINGRULE = "param2";
 
     // TODO: Rename and change types of parameters
     private Player player;
-    TextView descriptionTV,titleTV;
+    TextView titleTV,incommingRuleTV;
     Button nextButton;
-
+    String incommingRule;
+    LinearLayout inventoryLayout;
 
     public PlayerFragment() {
         // Required empty public constructor
@@ -37,11 +41,11 @@ public class PlayerFragment extends BaseFragment {
 
 
     // TODO: Rename and change types and number of parameters
-    public static PlayerFragment newInstance(Player player) {
+    public static PlayerFragment newInstance(Player player, String incommingRule) {
         PlayerFragment fragment = new PlayerFragment();
         Bundle args = new Bundle();
         args.putSerializable(PLAYER, player);
-
+        args.putString(INCOMMINGRULE,incommingRule);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,7 +55,7 @@ public class PlayerFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             player = (Player) getArguments().getSerializable(PLAYER);
-
+            incommingRule = getArguments().getString(INCOMMINGRULE);
         }
     }
 
@@ -63,9 +67,11 @@ public class PlayerFragment extends BaseFragment {
 
 
         titleTV = view.findViewById(R.id.title_tv);
-        titleTV.setText("Au tour de" + player.getName());
-        descriptionTV = view.findViewById(R.id.description_tv);
-        descriptionTV.setText(player.getRoleDescription());
+        titleTV.setText("Au tour de " + player.getName());
+
+
+        incommingRuleTV = view.findViewById(R.id.incommingRule_tv);
+        incommingRuleTV.setText(incommingRule);
         nextButton = view.findViewById(R.id.next_button);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +79,21 @@ public class PlayerFragment extends BaseFragment {
                 mListener.toNextScreen();
             }
         });
+        inventoryLayout = view.findViewById(R.id.inventory_layout);
+        showPlayerItems();
         return view;
+    }
+
+
+    void showPlayerItems()
+    {
+        FragmentManager fragmentManager = this.getChildFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        for (int i = 0; i < player.items.size(); i++) {
+
+            fragmentTransaction.add(R.id.inventory_layout, ItemItem.newInstance(player.items.get(i),player));
+
+        }
+        fragmentTransaction.commit();
     }
 }

@@ -12,6 +12,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.legange.Player.Player;
+import com.example.legange.Player.PlayerList;
 import com.example.legange.Rule.WritingRule;
 import com.example.legange.R;
 
@@ -41,10 +42,10 @@ public class WriteFragment extends BaseFragment {
     }
 
 
-    public static WriteFragment newInstance( WritingRule rule,ArrayList<Player> players, int phases) {
+    public static WriteFragment newInstance( WritingRule rule, int phases) {
         WriteFragment fragment = new WriteFragment();
         Bundle args = new Bundle();
-        args.putSerializable(ARG_PARAM1, players);
+
         args.putSerializable(ARG_PARAM2, rule);
         args.putInt(ARG_PARAM3, phases);
         fragment.setArguments(args);
@@ -55,7 +56,7 @@ public class WriteFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            players = (ArrayList<Player>) getArguments().getSerializable(ARG_PARAM1);
+
             rule = (WritingRule) getArguments().getSerializable(ARG_PARAM2);
             phases = getArguments().getInt(ARG_PARAM3);
         }
@@ -65,6 +66,7 @@ public class WriteFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_write, container, false);
+        players = PlayerList.players;
         texts = new ArrayList<>();
         editText = (EditText) view.findViewById(R.id.text_edit);
         validerButton = (Button) view.findViewById(R.id.valider_button);
@@ -75,6 +77,7 @@ public class WriteFragment extends BaseFragment {
             }
         });
         frameLayout = view .findViewById(R.id.frame_layout);
+
         return view;
     }
 

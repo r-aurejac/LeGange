@@ -21,15 +21,16 @@ public class BlackJackRule extends Rule {
     }
 
 
-@Override
-    public void show(FragmentManager fragmentManager, ArrayList<Player> players)
+
+    public void show(FragmentManager fragmentManager)
     {
         if(this.getIndice() == 1) {
             //FragmentManager fragmentManager = this.getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.game_linear_layout, BlackJackFragment.newInstance(players));
+            fragmentTransaction.replace(R.id.game_linear_layout, BlackJackFragment.newInstance());
             fragmentTransaction.commit();
+            incrIndice();
         }
-        else super.show(fragmentManager,players);
+        else super.show(fragmentManager);
     }
 }

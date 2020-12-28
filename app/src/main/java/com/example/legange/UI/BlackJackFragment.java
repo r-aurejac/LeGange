@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.legange.Player.Player;
+import com.example.legange.Player.PlayerList;
 import com.example.legange.R;
 
 import java.util.ArrayList;
@@ -31,10 +32,10 @@ public class BlackJackFragment extends BaseFragment {
 
 
 
-    public static BlackJackFragment newInstance(ArrayList<Player> players) {
+    public static BlackJackFragment newInstance() {
         BlackJackFragment fragment = new BlackJackFragment();
         Bundle args = new Bundle();
-        args.putSerializable(ARG_PARAM1, players);
+
 
         fragment.setArguments(args);
         return fragment;
@@ -44,7 +45,7 @@ public class BlackJackFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            players = (ArrayList<Player>) getArguments().getSerializable(ARG_PARAM1);
+
 
         }
     }
@@ -55,6 +56,7 @@ public class BlackJackFragment extends BaseFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_black_jack, container, false);
 
+        players = PlayerList.players;
         relancerButton = (Button) view.findViewById(R.id.relancer_button);
         suivantButton = (Button) view.findViewById(R.id.suivant_button);
         valueText = (TextView) view.findViewById(R.id.value_text);

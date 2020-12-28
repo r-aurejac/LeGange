@@ -23,15 +23,7 @@ public class PlayerList {
         }
         return null;
     }
-    public static Player findPlayerByRole(String role)
-    {
-        for(Player player : players) {
-            if (player.getRole().equals(role))
-                return player;
 
-        }
-        return null;
-    }
 
     public static Player getRandomPlayer()
     {

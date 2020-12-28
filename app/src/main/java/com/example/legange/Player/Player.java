@@ -1,13 +1,13 @@
 package com.example.legange.Player;
 
-import com.example.legange.Item;
+import com.example.legange.Item.Item;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Player implements Serializable, Comparable {
 
-    private String role;
+
 
     public String getRoleDescription() {
         return roleDescription;
@@ -29,13 +29,7 @@ public class Player implements Serializable, Comparable {
 
     private int rule_score = 0;
 
-    public String getRole() {
-        return role;
-    }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     public String getName() {
         return name;

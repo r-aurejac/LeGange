@@ -27,10 +27,10 @@ public class AnnouncementData {
     private void setAnnouncement()
     {
         announcements.add(new Rule("introduction",
-                "Bienvenue au tournois du Gange, tous les joueurs ici présents vont s'affronter pour tenter de gagner le droit de boire l'eau du fleuve le plus sacré du monde",
+                "Bienvenue au Gange, les joeurs ici present vont devoir prouver leur valeur en gagnant des points pendant une série de règle. Le perdant devra boire l'eau du fleuve le plus sacré du Monde ppur purifier son âme",
                 0));
         announcements.add(new Rule("Cérémonie du Gange",
-                "Chaque joueur verse la quantité qu'il désire de son verre dans le Gange. L'Hindou du groupe peut ajouter ce qu'il désire",0
+                "Chaque joueur verse la quantité qu'il désire de son verre dans le Gange. Le chef du groupe peut ajouter ce qu'il désire",0
                 ));
     }
 
@@ -41,9 +41,9 @@ public class AnnouncementData {
 
     private void setEndAnnouncement() {
         endAnnouncements.add(new Rule("Purification par le Gange",
-                "player a été désigné par les dieux Hindous, il remporte la Sainte Eau du Gange",0));
+                "player a déçu les dieux Hindoux, son âme doit être purifié",0));
         endAnnouncements.add(new Rule("Enrichissement par le gange",
-                "player est l'élu, il a le score le plus faible, mais étant très généreux il peut partager son brevage avec player2",
+                "player a déçu les dieux Hindoux, son âme doit être purifié mais player2",
                 0));
     }
 

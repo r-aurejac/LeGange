@@ -21,7 +21,6 @@ public class RuleFragment extends BaseFragment {
     private static final String INDICE = "param3";
 
     private Rule rule;
-    private ArrayList<Player> players;
     private TextView ruleText,titleText;
 
     private int indice = 0;
@@ -29,11 +28,11 @@ public class RuleFragment extends BaseFragment {
 
     }
 
-    public static RuleFragment newInstance(Rule rule, ArrayList<Player> players,int indice) {
+    public static RuleFragment newInstance(Rule rule,int indice) {
         RuleFragment fragment = new RuleFragment();
         Bundle args = new Bundle();
         args.putSerializable(RULE, rule);
-        args.putSerializable(PLAYERS, players);
+
         args.putInt(INDICE,indice);
         fragment.setArguments(args);
         return fragment;
@@ -44,7 +43,6 @@ public class RuleFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             rule = (Rule) getArguments().getSerializable(RULE);
-            players = (ArrayList<Player>) getArguments().getSerializable(PLAYERS);
             indice = getArguments().getInt(INDICE);
         }
 

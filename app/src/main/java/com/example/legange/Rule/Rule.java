@@ -22,7 +22,7 @@ public class Rule implements Serializable {
     }
 
 
-    private String name;
+    protected String name;
 
     public ArrayList<Player> getRulePlayers() {
         return rulePlayers;
@@ -75,12 +75,12 @@ public class Rule implements Serializable {
     }
 
 
-    public void show(FragmentManager fragmentManager, ArrayList<Player> players)
+    public void show(FragmentManager fragmentManager)
     {
 
         //FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.game_linear_layout, RuleFragment.newInstance(this, players,indice));
+        fragmentTransaction.replace(R.id.game_linear_layout, RuleFragment.newInstance(this,indice));
         fragmentTransaction.commit();
         indice++;
 

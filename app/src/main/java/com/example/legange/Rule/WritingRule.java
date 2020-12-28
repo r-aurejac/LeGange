@@ -3,13 +3,10 @@ package com.example.legange.Rule;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
-import com.example.legange.Player.Player;
 import com.example.legange.R;
 import com.example.legange.UI.WriteFragment;
 
-import java.util.ArrayList;
-
-public class WritingRule extends RandomPlayerRule {
+public class WritingRule extends RandomPlayesrRule {
 
     public int phases =0;
 
@@ -22,16 +19,17 @@ public class WritingRule extends RandomPlayerRule {
 
 
     @Override
-      public void show(FragmentManager fragmentManager, ArrayList<Player> players)
+      public void show(FragmentManager fragmentManager)
     {
 
         if(this.getIndice() == 1) {
             //FragmentManager fragmentManager = this.getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.game_linear_layout, WriteFragment.newInstance(this, players,phases));
+            fragmentTransaction.replace(R.id.game_linear_layout, WriteFragment.newInstance(this,phases));
             fragmentTransaction.commit();
+            incrIndice();
         }
-        else super.show(fragmentManager,players);
+        else super.show(fragmentManager);
     }
 
 }

@@ -67,12 +67,7 @@ public class GridFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_pirate, container, false);
         linearLayout = view.findViewById(R.id.linear_layout);
         attackers = new ArrayList<Player>();
-        for(int i = 0; i<players.size();i++) {
-            if (!players.get(i).getRole().equals(str.VOLEUR))
-                attackers.add(players.get(i));
 
-        }
-        pirate = PlayerList.findPlayerByRole(str.VOLEUR);
         initViews(view);
 
 

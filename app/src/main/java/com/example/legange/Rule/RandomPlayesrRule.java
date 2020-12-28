@@ -8,12 +8,12 @@ import java.util.ArrayList;
 
 
 
-public class RandomPlayerRule extends Rule {
+public class RandomPlayesrRule extends Rule {
 
     int playersNumber = 0;
     boolean playersAttributed = false;
 
-    public RandomPlayerRule(String name, String description, int points, int playersNumber) {
+    public RandomPlayesrRule(String name, String description, int points, int playersNumber) {
         super(name, description, points);
 
     this.playersNumber = playersNumber;

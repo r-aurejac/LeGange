@@ -9,7 +9,7 @@ public class str {
 
     // NUMERIC
 
-    public static final int MAX_PLAYER_NUMBER = 8;
+    public static final int MAX_PLAYER_NUMBER = 7;
     public static final int MAX_GAME_TURNS = 4;
 
     // ROLE
