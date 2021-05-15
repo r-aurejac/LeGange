@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.example.legange.Player.Player;
+import com.example.legange.Player.PlayerList;
 import com.example.legange.R;
 import com.example.legange.UI.BaseFragment;
 
@@ -23,7 +23,6 @@ import java.util.Collections;
 public class ScoreFragment extends BaseFragment {
 
 
-    private static final String PLAYER = "param1";
     private static final String RULEINFO = "param2";
     private LinearLayout linearLayout;
     private Button buttonCorrection,buttonInfo;
@@ -35,10 +34,9 @@ public class ScoreFragment extends BaseFragment {
         // Required empty public constructor
     }
 
-    public static ScoreFragment newInstance(ArrayList<Player> players, String ruleInfo) {
+    public static ScoreFragment newInstance(String ruleInfo) {
         ScoreFragment fragment = new ScoreFragment();
         Bundle args = new Bundle();
-        args.putSerializable(PLAYER, players);
         args.putString(RULEINFO,ruleInfo);
         fragment.setArguments(args);
         return fragment;
@@ -48,9 +46,9 @@ public class ScoreFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            players = (ArrayList<Player>) getArguments().getSerializable(PLAYER);
             ruleInfo = (String) getArguments().getString(RULEINFO);
         }
+        players = PlayerList.players;
 
     }
 
@@ -82,7 +80,7 @@ public class ScoreFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
 
-                mListener.toNextRule();
+
             }
         });
 
@@ -92,8 +90,7 @@ public class ScoreFragment extends BaseFragment {
 
     public void showScore() {
         correction = false;
-        ArrayList<Player> sortedPlayers = new ArrayList<Player>();
-        sortedPlayers.addAll(players);
+        ArrayList<Player> sortedPlayers = PlayerList.getPlayerListCopy();
         Collections.sort(sortedPlayers);
         Collections.reverse(sortedPlayers);
         FragmentManager fragmentManager = this.getChildFragmentManager();
@@ -101,7 +98,6 @@ public class ScoreFragment extends BaseFragment {
         fragmentTransaction.replace(R.id.score_linear_layout, new ScoreItem());
         for (int i = 0; i < sortedPlayers.size(); i++) {
             fragmentTransaction.add(R.id.score_linear_layout, ScoreItem.newInstance(sortedPlayers.get(i)));
-
         }
         fragmentTransaction.commit();
     }

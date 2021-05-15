@@ -1,6 +1,7 @@
 package com.example.legange.UI;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,7 @@ import com.example.legange.Player.Player;
 import com.example.legange.R;
 
 
-public class YesNoFragment extends BaseFragment  {
+public class YesNoFragment extends Fragment {
 
 
     private static final String PLAYER = "param1";
@@ -59,7 +60,7 @@ public class YesNoFragment extends BaseFragment  {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.toNextScreen();
+                //mListener.toNextScreen();
             }
         });
 
@@ -82,12 +83,12 @@ public class YesNoFragment extends BaseFragment  {
         if(points>0)
         player.incrementScore(points);
 
-        mListener.toNextScreen();
+        //mListener.toNextScreen();
    }
     private void onNonClicked() {
         if(points<0)
             player.incrementScore(points);
-        mListener.toNextScreen();
+        //mListener.toNextScreen();
     }
 
 

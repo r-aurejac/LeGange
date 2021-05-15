@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.legange.Player.Player;
 import com.example.legange.R;
-import com.example.legange.RuleInterface;
+import com.example.legange.Navigation.NavigationInterface;
 
 
 public class SelectPlayerItem extends Fragment {
@@ -25,7 +25,7 @@ public class SelectPlayerItem extends Fragment {
 
     public Player player;
 
-    private RuleInterface mListener;
+    private NavigationInterface mListener;
     private TextView textView;
 
     public SelectPlayerItem() {
@@ -78,8 +78,8 @@ public class SelectPlayerItem extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof RuleInterface) {
-            mListener = (RuleInterface) context;
+        if (context instanceof NavigationInterface) {
+            mListener = (NavigationInterface) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");

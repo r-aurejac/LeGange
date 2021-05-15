@@ -2,6 +2,8 @@ package com.example.legange.Player;
 
 import android.util.Log;
 
+import com.example.legange.Rand;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -28,7 +30,23 @@ public class PlayerList {
     public static Player getRandomPlayer()
     {
         Random r = new Random();
-        return players.get( r.nextInt((players.size()-1 - 0) + 1) + 0);
+        return players.get(Rand.randInt(0,players.size()-1));
+    }
+
+    public static String[] playersToStringArray()
+    {
+
+        String[] playersStringArray = new String[players.size()];
+        for(int i = 0; i< players.size();i++)
+            playersStringArray[i] = players.get(i).getName();
+
+        return playersStringArray;
+    }
+
+    public static ArrayList<Player> getPlayerListCopy()
+    {
+        return new ArrayList<>(players);
+
     }
 
 

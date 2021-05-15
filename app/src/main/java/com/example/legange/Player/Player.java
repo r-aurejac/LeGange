@@ -1,6 +1,6 @@
 package com.example.legange.Player;
 
-import com.example.legange.Item.Item;
+
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -59,10 +59,10 @@ public class Player implements Serializable, Comparable {
     public Player(String name)
     {
         this.name = name;
-        items = new ArrayList<>();
+
     }
 
-    public ArrayList<Item> items;
+
 
 
     @Override

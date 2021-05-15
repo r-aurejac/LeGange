@@ -12,7 +12,7 @@
         <activity android:name=".UI.TestActivity"></activity>
         <activity
             android:name=".UI.GameActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".UI.AddPlayerActivity"
             android:screenOrientation="portrait" />

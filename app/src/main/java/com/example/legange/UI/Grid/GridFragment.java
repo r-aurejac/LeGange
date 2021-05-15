@@ -10,10 +10,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.legange.Player.Player;
-import com.example.legange.R;
 import com.example.legange.Player.PlayerList;
+import com.example.legange.R;
 import com.example.legange.UI.BaseFragment;
-import com.example.legange.str;
 
 import java.util.ArrayList;
 
@@ -42,14 +41,6 @@ public class GridFragment extends BaseFragment {
     }
 
 
-    public static GridFragment newInstance(ArrayList<Player> players) {
-        GridFragment fragment = new GridFragment();
-        Bundle args = new Bundle();
-        args.putSerializable(ARG_PARAM1, players);
-
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,10 +57,9 @@ public class GridFragment extends BaseFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_pirate, container, false);
         linearLayout = view.findViewById(R.id.linear_layout);
-        attackers = new ArrayList<Player>();
+        attackers = PlayerList.getPlayerListCopy();
 
         initViews(view);
-
 
         return view;
     }
@@ -113,7 +103,7 @@ public class GridFragment extends BaseFragment {
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.toNextScreen();
+                //mListener.toNextScreen();
             }
         });
         linearLayout.addView(tv);
@@ -129,7 +119,7 @@ public class GridFragment extends BaseFragment {
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.toNextScreen();
+                //mListener.toNextScreen();
             }
         });
         linearLayout.addView(tv);

@@ -9,10 +9,11 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 
 import com.example.legange.R;
-import com.example.legange.RuleInterface;
+import com.example.legange.Navigation.NavigationInterface;
+import com.example.legange.Navigation.ScreenType;
 
 //Activité pour tester des fragments
-public class TestActivity extends AppCompatActivity implements RuleInterface {
+public class TestActivity extends AppCompatActivity implements NavigationInterface {
 
     LinearLayout linearLayout;
 
@@ -46,25 +47,8 @@ public class TestActivity extends AppCompatActivity implements RuleInterface {
     }
 
     @Override
-    public void toNextScreen() {
+    public void toNextScreen(ScreenType nextScreen) {
 
     }
 
-    @Override
-    public void toNextRule() {
-
-    }
-
-
-
-
-    @Override
-    public void toPlayerSelection() {
-
-    }
-
-    @Override
-    public void OnChefRuleEnd(String rule) {
-
-    }
 }

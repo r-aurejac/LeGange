@@ -1,6 +1,7 @@
 package com.example.legange.UI.Score;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +11,9 @@ import android.widget.TextView;
 
 import com.example.legange.Player.Player;
 import com.example.legange.R;
-import com.example.legange.UI.BaseFragment;
 
 
-
-
-public class ScoreModifItem extends BaseFragment {
+public class ScoreModifItem extends Fragment {
 
 
     private static final String PLAYER = "param1";
@@ -82,7 +80,7 @@ public class ScoreModifItem extends BaseFragment {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.toNextScreen();
+                //mListener.toNextScreen();
             }
         });
         return view;

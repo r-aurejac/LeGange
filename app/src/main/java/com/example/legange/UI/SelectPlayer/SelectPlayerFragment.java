@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.example.legange.Player.Player;
 import com.example.legange.R;
 import com.example.legange.Player.PlayerList;
-import com.example.legange.RuleInterface;
+import com.example.legange.Navigation.NavigationInterface;
 
 import java.util.ArrayList;
 
@@ -30,7 +30,7 @@ public class SelectPlayerFragment extends Fragment {
     private Button validerButton;
     private ArrayList<Player> players;
     private  ArrayList<SelectPlayerItem> selectPlayerItems;
-    private RuleInterface mListener;
+    private NavigationInterface mListener;
     private TextView textView;
     public SelectPlayerFragment() {
         // Required empty public constructor
@@ -67,7 +67,7 @@ public class SelectPlayerFragment extends Fragment {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.toNextScreen();
+                //mListener.toNextScreen();
             }
         });
         selectPlayerItems = new ArrayList<SelectPlayerItem>();
@@ -105,7 +105,7 @@ public class SelectPlayerFragment extends Fragment {
             if(selectPlayerItem.playerCb.isChecked())
                 PlayerList.findPlayerByName(selectPlayerItem.player.getName()).incrementScore(points);
         }
-        mListener.toNextScreen();
+        //mListener.toNextScreen();
 
     }
 
@@ -113,8 +113,8 @@ public class SelectPlayerFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof RuleInterface) {
-            mListener = (RuleInterface) context;
+        if (context instanceof NavigationInterface) {
+            mListener = (NavigationInterface) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");

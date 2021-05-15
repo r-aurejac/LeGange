@@ -1,122 +1,110 @@
-package com.example.legange.UI;
+    package com.example.legange.UI;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
+    import android.os.Bundle;
+    import android.view.LayoutInflater;
+    import android.view.View;
+    import android.view.ViewGroup;
+    import android.widget.Button;
+    import android.widget.EditText;
+    import android.widget.FrameLayout;
+    import android.widget.LinearLayout;
+    import android.widget.ScrollView;
+    import android.widget.TextView;
 
-import com.example.legange.Player.Player;
-import com.example.legange.Player.PlayerList;
-import com.example.legange.Rule.WritingRule;
-import com.example.legange.R;
+    import com.example.legange.Player.PlayerList;
+    import com.example.legange.Bloc.WriteTextBloc;
+    import com.example.legange.R;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
-
-public class WriteFragment extends BaseFragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private static final String ARG_PARAM3 = "param3";
-    private boolean isWritingPhase = true;
-    // TODO: Rename and change types of parameters
-    private ArrayList players;
-    private WritingRule rule;
-    private ArrayList<String> texts;
-
-    private Button validerButton;
-    private EditText editText;
-    private FrameLayout frameLayout;
-    int phases =0;
-
-    public WriteFragment() {
-        // Required empty public constructor
-    }
+    import java.util.ArrayList;
+    import java.util.Collections;
 
 
-    public static WriteFragment newInstance( WritingRule rule, int phases) {
-        WriteFragment fragment = new WriteFragment();
-        Bundle args = new Bundle();
+    public class WriteFragment extends BaseFragment {
 
-        args.putSerializable(ARG_PARAM2, rule);
-        args.putInt(ARG_PARAM3, phases);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        private static final String PHASES = "phases";
+        private boolean isWritingPhase = true;
+        private ArrayList players;
+        private WriteTextBloc rule;
+        private ArrayList<String> texts;
 
-            rule = (WritingRule) getArguments().getSerializable(ARG_PARAM2);
-            phases = getArguments().getInt(ARG_PARAM3);
+        private Button validerButton;
+        private EditText editText;
+        private FrameLayout frameLayout;
+        int phases =0;
+
+        public WriteFragment() {
+            // Required empty public constructor
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view  = inflater.inflate(R.layout.fragment_write, container, false);
-        players = PlayerList.players;
-        texts = new ArrayList<>();
-        editText = (EditText) view.findViewById(R.id.text_edit);
-        validerButton = (Button) view.findViewById(R.id.valider_button);
-        validerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                validation();
-            }
-        });
-        frameLayout = view .findViewById(R.id.frame_layout);
-
-        return view;
-    }
 
 
+        public static WriteFragment newInstance(WriteTextBloc rule, int phases) {
+            WriteFragment fragment = new WriteFragment();
+            Bundle args = new Bundle();
+            args.putSerializable(RULE, rule);
+            args.putInt(PHASES, phases);
+            fragment.setArguments(args);
+            return fragment;
+        }
 
-    private void validation()
-    {
-        if(isWritingPhase) {
-            texts.add(editText.getText().toString());
-            editText.setText("");
-            if (texts.size() == players.size()-1) {
-                Collections.shuffle(texts);
-                read();
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            if (getArguments() != null) {
 
-            }
-            else if ( rule.phases == 1)
-            {
-                mListener.OnChefRuleEnd(texts.get(0));
+                rule = (WriteTextBloc) getArguments().getSerializable(RULE);
+                phases = getArguments().getInt(PHASES);
             }
         }
-        else mListener.toNextScreen();
-    }
-    private void read()
-    {
-        isWritingPhase =false;
-        frameLayout.removeAllViews();
-        LinearLayout linearLayout = new LinearLayout(getContext());
-        linearLayout.setOrientation(LinearLayout.VERTICAL);
-        ScrollView scrollView = new ScrollView(getContext());
-        TextView tv;
-        for(String string : texts) {
-            tv = new TextView(getContext());
-            tv.setText(string);
-            tv.setTextSize(35);
-            linearLayout.addView(tv);
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View view  = inflater.inflate(R.layout.fragment_write, container, false);
+            players = PlayerList.players;
+            texts = new ArrayList<>();
+            editText = (EditText) view.findViewById(R.id.text_edit);
+            validerButton = (Button) view.findViewById(R.id.valider_button);
+            validerButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    validation();
+                }
+            });
+            frameLayout = view .findViewById(R.id.frame_layout);
+
+            return view;
         }
-        scrollView.addView(linearLayout);
-        frameLayout.addView(scrollView);
+
+
+
+        private void validation()
+        {
+                texts.add(editText.getText().toString());
+                editText.setText("");
+                if (texts.size() == phases) {
+                    Collections.shuffle(texts);
+                    read();
+                }
+        }
+
+        private void read()
+        {
+            isWritingPhase =false;
+            frameLayout.removeAllViews();
+            LinearLayout linearLayout = new LinearLayout(getContext());
+            linearLayout.setOrientation(LinearLayout.VERTICAL);
+            ScrollView scrollView = new ScrollView(getContext());
+            TextView tv;
+            for(String string : texts) {
+                tv = new TextView(getContext());
+                tv.setText(string);
+                tv.setTextSize(35);
+                linearLayout.addView(tv);
+            }
+            scrollView.addView(linearLayout);
+            frameLayout.addView(scrollView);
+        }
+
+
     }
-
-
-}
