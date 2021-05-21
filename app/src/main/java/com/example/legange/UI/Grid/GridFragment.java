@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.legange.Player.Player;
-import com.example.legange.Player.PlayerList;
+import com.example.legange.Player.PlayersManager;
 import com.example.legange.R;
 import com.example.legange.UI.BaseFragment;
 
@@ -57,7 +57,7 @@ public class GridFragment extends BaseFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_pirate, container, false);
         linearLayout = view.findViewById(R.id.linear_layout);
-        attackers = PlayerList.getPlayerListCopy();
+        attackers = PlayersManager.getPlayerListCopy();
 
         initViews(view);
 

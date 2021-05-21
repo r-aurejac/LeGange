@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         gameTestButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ArrayList<Player> players = new ArrayList<>();
-                for(int i = 0; i< CoreConstant.MAX_PLAYER_NUMBER; i++)
+                for(int i = 0; i< CoreConstant.QUICK_GAME_PLAYER_NUMBER; i++)
                 {
                     String name = "Joueur" + String.valueOf(i+1);
                     players.add(new Player(name));

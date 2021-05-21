@@ -7,17 +7,29 @@ import java.util.ArrayList;
 
 public class Player implements Serializable, Comparable {
 
+    private int rule_score = 0;
+    private  String name;
+    private int score;
 
+    private int ticketsNumber = 0;
 
-    public String getRoleDescription() {
-        return roleDescription;
+    public Player(String name)
+    {
+        this.name = name;
+
     }
 
-    public void setRoleDescription(String roleDescription) {
-        this.roleDescription = roleDescription;
+    public int getTicketsNumber() {
+        return ticketsNumber;
     }
 
-    private String roleDescription ="";
+    public void addTickets(int number) {
+        ticketsNumber += number;
+    }
+
+    public void deleteTicket() {
+        ticketsNumber--;
+    }
 
     public int getRule_score() {
         return rule_score;
@@ -26,10 +38,6 @@ public class Player implements Serializable, Comparable {
     public void setRule_score(int rule_score) {
         this.rule_score = rule_score;
     }
-
-    private int rule_score = 0;
-
-
 
     public String getName() {
         return name;
@@ -51,19 +59,6 @@ public class Player implements Serializable, Comparable {
     {
         score += inc;
     }
-
-
-    private  String name;
-    private int score;
-
-    public Player(String name)
-    {
-        this.name = name;
-
-    }
-
-
-
 
     @Override
     public int compareTo(Object o) {

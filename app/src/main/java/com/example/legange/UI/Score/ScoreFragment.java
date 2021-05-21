@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.example.legange.Navigation.DisplayManager;
+import com.example.legange.Navigation.ScreenType;
 import com.example.legange.Player.Player;
-import com.example.legange.Player.PlayerList;
+import com.example.legange.Player.PlayersManager;
 import com.example.legange.R;
 import com.example.legange.UI.BaseFragment;
 
@@ -25,7 +27,7 @@ public class ScoreFragment extends BaseFragment {
 
     private static final String RULEINFO = "param2";
     private LinearLayout linearLayout;
-    private Button buttonCorrection,buttonInfo;
+    private Button correctionButton, infoButton, nextButton;
     private String ruleInfo = "Aucune info disponible";
     private ArrayList<Player> players;
 
@@ -48,7 +50,7 @@ public class ScoreFragment extends BaseFragment {
         if (getArguments() != null) {
             ruleInfo = (String) getArguments().getString(RULEINFO);
         }
-        players = PlayerList.players;
+        players = PlayersManager.players;
 
     }
 
@@ -59,8 +61,9 @@ public class ScoreFragment extends BaseFragment {
 
 
         View view = inflater.inflate(R.layout.fragment_score, container, false);
-        buttonCorrection = view.findViewById(R.id.button_modif);
-        buttonCorrection.setOnClickListener(new View.OnClickListener() {
+        correctionButton = view.findViewById(R.id.button_modif);
+        nextButton = view.findViewById(R.id.score_next_button);
+        correctionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(!correction)
@@ -68,19 +71,17 @@ public class ScoreFragment extends BaseFragment {
                 else showScore();
             }
         });
-        buttonInfo = view.findViewById(R.id.info_button);
-        buttonInfo.setOnClickListener(new View.OnClickListener() {
+        infoButton = view.findViewById(R.id.info_button);
+        infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showRuleInfo();
             }
         });
-
-        view.setOnClickListener(new View.OnClickListener() {
+        nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
+                toNextScreen(ScreenType.NEXTRULE);
             }
         });
 
@@ -90,9 +91,7 @@ public class ScoreFragment extends BaseFragment {
 
     public void showScore() {
         correction = false;
-        ArrayList<Player> sortedPlayers = PlayerList.getPlayerListCopy();
-        Collections.sort(sortedPlayers);
-        Collections.reverse(sortedPlayers);
+        ArrayList<Player> sortedPlayers = PlayersManager.getPlayerRankingList();
         FragmentManager fragmentManager = this.getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.score_linear_layout, new ScoreItem());
@@ -103,10 +102,7 @@ public class ScoreFragment extends BaseFragment {
     }
     public void showCorrection() {
         correction = true;
-        ArrayList<Player> sortedPlayers = new ArrayList<Player>();
-        sortedPlayers.addAll(players);
-        Collections.sort(sortedPlayers);
-        Collections.reverse(sortedPlayers);
+        ArrayList<Player> sortedPlayers = PlayersManager.getPlayerRankingList();
         FragmentManager fragmentManager = this.getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.score_linear_layout, new ScoreItem());

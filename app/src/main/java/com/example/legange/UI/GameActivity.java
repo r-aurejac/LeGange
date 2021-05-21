@@ -6,8 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
-import com.example.legange.Rounds.IndividualRuleData;
-import com.example.legange.Player.PlayerList;
+import com.example.legange.Player.PlayersManager;
 import com.example.legange.Rounds.Round;
 import com.example.legange.Player.Player;
 import com.example.legange.R;
@@ -22,14 +21,8 @@ import java.util.Collections;
 
 public class GameActivity extends AppCompatActivity implements NavigationInterface {
 
-
-    int playerIndex = 0;
-    int gameIndex = 0;
-    TextBloc currentRule;
     private final static String PLAYERS = "players";
     ArrayList<Player> players;
-    ArrayList<Round> rounds;
-    int currentRoundIndice = 0;
     LinearLayout gameLinearLayout;
     DisplayManager displayManager;
     RoundsManager roundsManager;
@@ -49,7 +42,7 @@ public class GameActivity extends AppCompatActivity implements NavigationInterfa
             players = (ArrayList<Player>) getIntent().getSerializableExtra(PLAYERS);
         }
         Collections.shuffle(players);
-        PlayerList.setPlayerList(players);
+        PlayersManager.setPlayerList(players);
 
         gameLinearLayout = (LinearLayout) findViewById(R.id.game_linear_layout);
         displayManager = new DisplayManager(gameLinearLayout, getSupportFragmentManager());
@@ -72,6 +65,10 @@ public class GameActivity extends AppCompatActivity implements NavigationInterfa
 
             case SCORE:
                 displayManager.showScore();
+                break;
+
+            case LOTTERY:
+                displayManager.showLottery();
                 break;
         }
 

@@ -6,7 +6,7 @@ import com.example.legange.Navigation.ScreenType;
 public class TextBloc extends AbstractBloc {
 
     protected String title;
-    private String description = "Aucune description";
+    protected String description = "Aucune description";
 
     public TextBloc(ScreenType nextScreen, String title, String description)
     {

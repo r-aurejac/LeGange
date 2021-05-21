@@ -7,8 +7,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.legange.Player.Player;
 import com.example.legange.R;
 import com.example.legange.Bloc.BlackJackBloc;
+
+import java.util.ArrayList;
 
 
 public class BlackJackFragment extends BaseFragment {
@@ -17,6 +20,9 @@ public class BlackJackFragment extends BaseFragment {
     private TextView totalText, playerNameText,valueText;
     private Button nextButton, drawButton;
     private BlackJackBloc blackJackRule;
+
+
+
     public BlackJackFragment() {
         // Required empty public constructor
     }
@@ -96,7 +102,6 @@ public class BlackJackFragment extends BaseFragment {
             navigationInterface.toNextScreen(blackJackRule.nextScreen);
         }
     }
-
 
 
 }

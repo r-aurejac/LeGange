@@ -11,7 +11,8 @@
     import android.widget.ScrollView;
     import android.widget.TextView;
 
-    import com.example.legange.Player.PlayerList;
+    import com.example.legange.Navigation.ScreenType;
+    import com.example.legange.Player.PlayersManager;
     import com.example.legange.Bloc.WriteTextBloc;
     import com.example.legange.R;
 
@@ -23,25 +24,21 @@
 
 
         private static final String PHASES = "phases";
-        private boolean isWritingPhase = true;
-        private ArrayList players;
-        private WriteTextBloc rule;
         private ArrayList<String> texts;
 
         private Button validerButton;
         private EditText editText;
         private FrameLayout frameLayout;
         int phases =0;
-
+        boolean finished = false;
         public WriteFragment() {
             // Required empty public constructor
         }
 
 
-        public static WriteFragment newInstance(WriteTextBloc rule, int phases) {
+        public static WriteFragment newInstance(int phases) {
             WriteFragment fragment = new WriteFragment();
             Bundle args = new Bundle();
-            args.putSerializable(RULE, rule);
             args.putInt(PHASES, phases);
             fragment.setArguments(args);
             return fragment;
@@ -52,7 +49,6 @@
             super.onCreate(savedInstanceState);
             if (getArguments() != null) {
 
-                rule = (WriteTextBloc) getArguments().getSerializable(RULE);
                 phases = getArguments().getInt(PHASES);
             }
         }
@@ -61,7 +57,6 @@
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View view  = inflater.inflate(R.layout.fragment_write, container, false);
-            players = PlayerList.players;
             texts = new ArrayList<>();
             editText = (EditText) view.findViewById(R.id.text_edit);
             validerButton = (Button) view.findViewById(R.id.valider_button);
@@ -80,17 +75,23 @@
 
         private void validation()
         {
+            if (finished)
+            {
+                toNextScreen(ScreenType.SCORE);
+            }
                 texts.add(editText.getText().toString());
                 editText.setText("");
                 if (texts.size() == phases) {
                     Collections.shuffle(texts);
                     read();
+                    validerButton.setText("suivant");
+                    finished =true;
                 }
+
         }
 
         private void read()
         {
-            isWritingPhase =false;
             frameLayout.removeAllViews();
             LinearLayout linearLayout = new LinearLayout(getContext());
             linearLayout.setOrientation(LinearLayout.VERTICAL);
